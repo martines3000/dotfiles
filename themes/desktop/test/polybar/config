@@ -1,0 +1,372 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[colors]
+;; main colors
+background = #191919
+background-alt = #191919
+foreground = #fbe5de
+foreground-alt = #ffd376
+
+sep = #666666
+primary = #ca2328
+secondary = #ffd376
+alert = #bd2c40
+
+
+[bar/main]
+;monitor = ${env:MONITOR:HDMI-1}
+width = 100%
+height = 26
+;offset-x = 1%
+;offset-y = 1%
+radius-top = 0.0
+radius-bottom = 0.0
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 0
+line-color = #f00
+
+border-bottom-size = 1
+border-bottom-color = ${colors.sep}
+
+padding = 2
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = Iosevka:size=10;3
+font-1 = Iosevka:size=21;5
+font-2 = Iosevka:size=18;5
+
+modules-left = launcher sep term browser files sep cpu temperature memory filesystem-ssd filesystem-harddrive sep
+modules-center = date
+modules-right = sep network-down network-up sep pulseaudio microphone sep sysmenu sep
+
+tray-position = right
+tray-detached = false
+tray-maxsize = 16
+tray-padding = 0
+tray-background = ${colors.background}
+tray-offset-x = 0
+tray-offset-y = 0
+tray-scale = 1.0
+
+enable-ipc = true
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...%
+
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-underline = ${colors.secondary}
+
+label-layout = %layout%
+label-layout-underline = ${colors.secondary}
+
+label-indicator-padding = 2
+label-indicator-margin = 1
+label-indicator-background = ${colors.secondary}
+label-indicator-underline = ${colors.secondary}
+
+
+[module/filesystem-ssd]
+type = internal/fs
+interval = 30
+
+mount-0 = /
+
+fixed-values = true
+
+label-mounted = " %free%"
+
+format-mounted-font = 3
+format-mounted = <label-mounted>
+format-mounted-prefix = ""
+format-mounted-prefix-foreground = ${colors.secondary}
+
+
+[module/filesystem-harddrive]
+type = internal/fs
+interval = 3600
+
+mount-0 = /mnt/690055d5-da38-459e-8189-bbbf16672bb3
+
+fixed-values = true
+
+label-mounted = " %free%"
+
+format-mounted-font = 3
+format-mounted = <label-mounted>
+format-mounted-prefix = ""
+format-mounted-prefix-foreground = ${colors.secondary}
+
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+;pin-workspaces = true
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+; focused = Active workspace on focused monitor
+label-focused = %index%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 2
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-padding = 2
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+; Separator in between workspaces
+; label-separator = |
+
+
+[module/cpu]
+type = internal/cpu
+interval = 1
+
+format-font = 2
+format = <label>
+format-prefix = ""
+format-prefix-foreground = ${colors.secondary}
+label = " %percentage%%"
+
+
+[module/memory]
+type = internal/memory
+interval = 2
+
+format-font = 2
+format-prefix = ""
+format-prefix-foreground = ${colors.secondary}
+label = " %mb_used%"
+
+
+[module/eth]
+type = internal/network
+interface = enp3s0
+interval = 3.0
+
+label-connected = %local_ip%
+
+
+[module/network-down]
+type = internal/network
+interface = enp3s0
+interval = 1.0
+accumulate-stats = true
+
+label-connected = " %downspeed%"
+
+format-connected-font = 2
+format-connected-prefix = ""
+format-connected = <label-connected>
+format-connected-prefix-foreground = ${colors.secondary}
+
+label-disconnected = " Offline"
+
+format-disconnected-font = 2
+format-disconnected = <label-disconnected>
+format-disconnected-prefix = ""
+format-disconnected-prefix-foreground = ${colors.secondary}
+
+
+[module/network-up]
+type = internal/network
+interface = enp3s0
+interval = 1.0
+accumulate-stats = true
+
+label-connected = " %upspeed%"
+
+format-connected-font = 2
+format-connected-prefix = ""
+format-connected = <label-connected>
+format-connected-prefix-foreground = ${colors.secondary}
+
+
+[module/date]
+type = internal/date
+interval = 1.0
+
+date = %A, %d, %B
+date-alt =
+
+time = at %I:%M %p
+time-alt = %H:%M:%S
+
+; format-font = 2
+; format = <label>
+; format-prefix = "" 
+; format-prefix-foreground = ${colors.secondary}
+
+label = " %date% %time%"
+
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume-prefix = "墳 "  
+format-volume = <label-volume>
+format-volume-font = 2
+format-volume-prefix-foreground = ${colors.secondary}
+
+label-volume = %percentage%%
+label-volume-font = 1
+
+label-muted = 婢
+label-muted-font = 2
+label-muted-foreground = ${colors.secondary}
+
+
+[module/microphone]
+type = custom/script
+exec = amixer sget Capture | awk -F"[][]" '/dB/ { print $2 " " $4}'
+interval = 0.1
+label = %output%
+format-prefix= " "
+format-prefix-font= 3
+format-prefix-foreground= ${colors.secondary}
+
+
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+interval = 5
+
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input
+
+warn-temperature = 75
+
+format = <label>
+format-underline = #f50a4d
+format-warn = <label-warn>
+format-warn-underline = ${self.format-underline}
+
+label = "%temperature-c%"
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.secondary}
+
+
+[module/sep]
+type = custom/text
+content = |
+
+content-foreground = ${colors.sep}
+
+
+[module/apps]
+type = custom/text
+
+
+[module/term]
+inherit = module/apps
+content = ""
+content-font = 2
+content-foreground = ${colors.primary}
+click-left = alacritty &
+
+
+[module/files]
+inherit = module/apps
+content = ""
+content-font = 2
+content-foreground = ${colors.secondary}
+click-left = alacritty -e ranger &
+click-right = thunar &
+
+
+[module/browser]
+inherit = module/apps
+content = ""
+content-font = 2
+content-foreground = ${colors.secondary}
+click-left = brave-browser &
+click-right = firefox &
+
+
+[module/launcher]
+type = custom/text
+
+content = ""
+content-font = 2
+content-foreground = ${colors.secondary}
+
+click-left = $HOME/.config/polybar/scripts/launcher.sh &
+
+
+[module/sysmenu]
+type = custom/text
+content = 
+content-font = 2
+
+content-background = ${colors.background}
+content-foreground = ${colors.primary}
+content-padding = 2
+
+click-left = $HOME/.config/polybar/scripts/powermenu.sh &
+
+
+[settings]
+
+throttle-output = 5
+throttle-output-for = 10
+
+screenchange-reload = false
+
+compositing-background = source
+compositing-foreground = over
+compositing-overline = over
+compositing-underline = over
+compositing-border = over
+
+pseudo-transparency = false
+
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5

@@ -1,0 +1,13 @@
+/* colors */
+
+* {
+  background:       #ffd376;
+  background-alt:   #191919;
+  foreground:       #191919;
+  foreground-alt:   #ffd376;
+  primary:          #ffd376;
+  secondary:        #ca2328;
+  border:           #ffd376;
+  border-alt:       #ca2328;
+  selected:         #ffd376;
+}

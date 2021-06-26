@@ -1,0 +1,59 @@
+configuration {
+	font:							"Iosevka 64";
+    show-icons:                     false;
+	icon-theme: 					"Papirus";
+    drun-display-format:            "{name}";
+    disable-history:                false;
+    fullscreen:                     false;
+	hide-scrollbar: 				true;
+	sidebar-mode: 					false;
+}
+
+@import "colors.rasi"
+
+window {
+    transparency:                   "real";
+    background-color:               @background-alt;
+    text-color:                     @foreground;
+    border-radius:                  0px;
+    height:                         24%;
+    width:                          53%;
+    location:                       center;
+    x-offset:                       0;
+    y-offset:                       0;
+}
+
+listview {
+    background-color:               @background;
+    margin:                         0% 0% 0% 0%;
+    spacing:                        2%;
+    cycle:                          true;
+    dynamic:                        true;
+    layout:                         horizontal;
+}
+
+mainbox {
+    background-color:               @background;
+    children:                       [ listview ];
+    padding:                        4% 2% 0% 2%;
+}
+
+element {
+    background-color:               @background-alt;
+    text-color:                     @foreground-alt;
+    orientation:                    horizontal;
+    border-radius:                  0px;
+}
+
+element-text {
+	font:							"Iosevka 64";
+    expand:                         true;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    margin:                         3%;
+}
+
+element selected {
+    background-color:               @background;
+    text-color:                     @foreground;
+}
