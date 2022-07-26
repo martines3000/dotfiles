@@ -1,5 +1,6 @@
 ## INFO
 
+- **Distro**: Ubuntu 20.04
 - **Window Manager**: i3
 - **Bar**: polybar - (hack preset from [polybar-themes](https://github.com/adi1090x/polybar-themes))
 - **Menu**: rofi

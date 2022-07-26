@@ -1,5 +1,6 @@
 ## INFO
 
+- **Distro**: Ubuntu 20.04
 - **Window Manager**: i3
 - **Bar**: polybar
 - **Menu**: rofi
