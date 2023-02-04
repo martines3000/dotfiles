@@ -5,7 +5,7 @@
 - **Window Manager**: i3
 - **Bar**: i3status-rust
 - **Terminal**: alacritty
-- **Shell**: fish + (starship)[https://starship.rs/]
+- **Shell**: fish + [starship](https://starship.rs/)
 - **File Manager**: dolphin
 - **Node version manager**: fnm
 
