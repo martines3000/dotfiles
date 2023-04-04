@@ -13,3 +13,8 @@ eval /home/martines/miniconda3/bin/conda "shell.fish" "hook" $argv | source
 export PATH="$PATH:/home/martines/.foundry/bin"
 set -gx VOLTA_HOME "$HOME/.volta"
 set -gx PATH "$VOLTA_HOME/bin" $PATH
+
+# pnpm
+set -gx PNPM_HOME "/home/martines/.local/share/pnpm"
+set -gx PATH "$PNPM_HOME" $PATH
+# pnpm end

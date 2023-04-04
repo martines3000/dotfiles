@@ -29,3 +29,28 @@ colors:
 
 font:
   size: 12
+  normal:
+    family: Source Code Pro
+
+  bold:
+    family: Fira Code Nerd Font # mostly for cool icons in prompt
+    style: Bold
+
+  italic:
+    family: Source Code Pro
+    style: Italic
+
+  size: 12.0
+
+  offset:
+    x: 0
+    y: 0
+
+  glyph_offset:
+    x: 0
+    y: 0
+
+selection:
+    # When set to `true`, selected text will be copied to the primary
+    # clipboard.
+    save_to_clipboard: true
