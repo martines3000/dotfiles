@@ -1,0 +1,53 @@
+# Swaylock config
+
+# Behavior
+ignore-empty-password
+daemonize
+
+# Look
+indicator-idle-visible
+screenshots
+clock
+fade-in=1
+effect-blur=10x10
+
+# Font
+font=RecursiveSansCasualStatic
+
+# Date & Time format
+datestr=%Y-%m-%d
+timestr=%I:%M %p
+
+# Ring shape
+indicator-radius=200
+indicator-thickness=50
+
+# Idle
+ring-color=94e2d5ff
+line-color=cba6f7ff
+text-color=cba6f7ff
+separator-color=f9e2afff
+
+# Pressing keys
+key-hl-color=f9e2afff
+bs-hl-color=f38ba8ff
+caps-lock-key-hl-color=eba0acff
+caps-lock-bs-hl-color=f38ba8ff
+
+# Wrong password
+ring-wrong-color=f38ba8ff
+line-wrong-color=f9e2afff
+text-wrong-color=f9e2afff
+inside-wrong-color=f38ba800
+
+# Verifying password
+ring-ver-color=89b4faff
+line-ver-color=a6e3a1ff
+text-ver-color=a6e3a1ff
+inside-ver-color=89b4fa00
+
+# Cleared password
+ring-clear-color=fab387ff
+line-clear-color=89dcebff
+text-clear-color=89dcebff
+inside-clear-color=fab38700

@@ -1,0 +1,25 @@
+(defvar home_dir "/home/$USER/.config/eww/Scripts")
+
+(defpoll time :interval "20s"
+	`date +" %a %b %d %I:%M %p"`)
+
+(defpoll volume :interval "1s"
+        `/home/$USER/.config/eww/Scripts/volume.py`)
+
+(defwindow bar
+	:monitor 0
+	:windowtype "dock"
+	:geometry (geometry 
+			:width "100%"
+			:height "4%"
+			:anchor "top center"
+			)
+	:exclusive true	
+
+	(box :class "main-container"
+
+	(button :class "time_battery" :onclick "${home_dir}/toggle_clipboard_manager.py" :halign "end" "${time}"
+	)
+
+	)
+)

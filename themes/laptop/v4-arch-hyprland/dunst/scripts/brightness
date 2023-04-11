@@ -1,0 +1,18 @@
+#!/bin/bash
+
+down(){
+brillo -q -U 2
+brightness=$(brillo)
+dunstify -a "BRIGHTNESS" "Decreasing to $brightness%" -h float:brightness:value:"$brightness" -r 2593 -u normal
+}
+
+up(){
+brillo -q -A 2
+brightness=$(brillo)
+dunstify -a "BRIGHTNESS" "Increasing to $brightness%" -h int:brightness:value:"$brightness" -r 2593 -u normal
+}
+
+case "$1" in
+  up) up;;
+  down) down;;
+esac
