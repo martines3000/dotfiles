@@ -1,5 +1,7 @@
 # Dotfile structure research
 
+This note records the research before v2 implementation. Consult the current profile READMEs for implementation and test status.
+
 Checked **2026-11-10** against [PR #1](https://github.com/martines3000/dotfiles/pull/1), head `05c6c0af0fc4de4226eb5813d79357adb219c87b`. Repository examples below link to inspected revisions. Commit dates establish observed activity, not compatibility or continuing maintenance. The newly supplied friend repository is [pseudobun/dotfiles](https://github.com/pseudobun/dotfiles), inspected below.
 
 ## Assessment of this PR

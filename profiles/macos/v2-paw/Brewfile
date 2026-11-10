@@ -1,0 +1,22 @@
+# Apple Silicon desktop dependencies; installation is an explicit separate step.
+tap "felixkratz/formulae"
+brew "felixkratz/formulae/sketchybar"
+brew "python"
+brew "just"
+brew "jq"
+brew "gh"
+brew "fish"
+brew "starship"
+brew "fnm"
+brew "eza"
+brew "bat"
+
+cask "alacritty"
+cask "karabiner-elements"
+cask "spotify"
+cask "font-jetbrains-mono-nerd-font"
+cask "font-geist-mono-nerd-font"
+cask "font-sketchybar-app-font"
+
+# PAW is installed separately: verify release availability or use the recorded source revision.
+# No restart_service entries: package installation must not activate the desktop.

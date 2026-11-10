@@ -1,0 +1,400 @@
+{
+  "schema_version": 1,
+  "captured_on": "2026-11-10",
+  "status": "candidate; disposable-target restore tested, fresh macOS not tested",
+  "scope": "PAW and Sketchybar migration with selected Mac companion configuration; v1 remains frozen.",
+  "runtime": {
+    "macos": "26.7.1",
+    "architecture": "arm64",
+    "paw_version": "0.1.0-beta.1+5249781",
+    "paw_source_revision": "5249781ff7d3b40eab60383a2c943762389cf0f8",
+    "paw_signing": "ad hoc"
+  },
+  "files": [
+    {
+      "path": "home/.config/alacritty/alacritty.toml",
+      "source": "~/.config/alacritty/alacritty.toml",
+      "source_sha256": "f42f9d9adb2c1faf5a71000f0519ea9353b18407f61b86df7dddc357f129a36f",
+      "sha256": "f42f9d9adb2c1faf5a71000f0519ea9353b18407f61b86df7dddc357f129a36f",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/fish/conf.d/fish_frozen_key_bindings.fish",
+      "source": "~/.config/fish/conf.d/fish_frozen_key_bindings.fish",
+      "source_sha256": "644b713cdc00ea1fbac2a5d85b1d50e42faa0bdd2ef810c017bfeef86635ac3c",
+      "sha256": "644b713cdc00ea1fbac2a5d85b1d50e42faa0bdd2ef810c017bfeef86635ac3c",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/fish/conf.d/fish_frozen_theme.fish",
+      "source": "~/.config/fish/conf.d/fish_frozen_theme.fish",
+      "source_sha256": "f2e340166dc966cbd8ed1621b5118200fbc001950fd91330222b3e00e3e92f89",
+      "sha256": "f2e340166dc966cbd8ed1621b5118200fbc001950fd91330222b3e00e3e92f89",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/fish/conf.d/fnm.fish",
+      "source": "~/.config/fish/conf.d/fnm.fish",
+      "source_sha256": "61625768d9bcdbd041aa31dd877a3e3c303db6aae8ae469b13cdade21d7ad76c",
+      "sha256": "a327a47a5922342860c1a618b725878629afd1f2bd0795359f572509d4fb03cf",
+      "modified_for_v2": true
+    },
+    {
+      "path": "home/.config/fish/config.fish",
+      "source": "~/.config/fish/config.fish",
+      "source_sha256": "eacd15142a1d978de7ccb3bc43562fd36b6c01912e8fa11fd62b36e2ca7094a9",
+      "sha256": "720c377827aed96a94aa8850f7370b36cf60d35b1e19c68fd59ec9e06922f6fa",
+      "modified_for_v2": true
+    },
+    {
+      "path": "home/.config/fish/functions/__bass.py",
+      "source": "~/.config/fish/functions/__bass.py",
+      "source_sha256": "c5ad999270c964dd6eb7e32ea6e0e3f25f14ca510b05d5ffc218745852a5abcc",
+      "sha256": "c5ad999270c964dd6eb7e32ea6e0e3f25f14ca510b05d5ffc218745852a5abcc",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/fish/functions/bass.fish",
+      "source": "~/.config/fish/functions/bass.fish",
+      "source_sha256": "d57689dba98e3228049618f352426aa59fd018f70697ab400639ef78b0eadef4",
+      "sha256": "d57689dba98e3228049618f352426aa59fd018f70697ab400639ef78b0eadef4",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/fish/functions/cat.fish",
+      "source": "~/.config/fish/functions/cat.fish",
+      "source_sha256": "9ad174ea330d3a096e456d47bd084041eb878156e7821cfafd6ad0166753520f",
+      "sha256": "9ad174ea330d3a096e456d47bd084041eb878156e7821cfafd6ad0166753520f",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/fish/functions/cs.fish",
+      "source": "~/.config/fish/functions/cs.fish",
+      "source_sha256": "4982cd5e82c6e50e1943736a5a817e107efe9949cf2abc25d086509897fb5402",
+      "sha256": "4982cd5e82c6e50e1943736a5a817e107efe9949cf2abc25d086509897fb5402",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/fish/functions/fisher.fish",
+      "source": "~/.config/fish/functions/fisher.fish",
+      "source_sha256": "cc9531f5aa6fe3a034e3d76d6520e1613695c19448a7a003fc216bc9dbb4ec02",
+      "sha256": "cc9531f5aa6fe3a034e3d76d6520e1613695c19448a7a003fc216bc9dbb4ec02",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/fish/functions/ll.fish",
+      "source": "~/.config/fish/functions/ll.fish",
+      "source_sha256": "ddfd110f0a331e9d68843029871f64bf3559166df55f79b8789d013926380b53",
+      "sha256": "ddfd110f0a331e9d68843029871f64bf3559166df55f79b8789d013926380b53",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/fish/functions/lla.fish",
+      "source": "~/.config/fish/functions/lla.fish",
+      "source_sha256": "dee956510117145f79e4475c8ecfebf98cd09ff9ab88ed5d023e14d86cf89f44",
+      "sha256": "dee956510117145f79e4475c8ecfebf98cd09ff9ab88ed5d023e14d86cf89f44",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/fish/functions/llt.fish",
+      "source": "~/.config/fish/functions/llt.fish",
+      "source_sha256": "5d17c98cc24b37ed87696991ce60cac76353ff2b622d3043e7984b8289e82b2d",
+      "sha256": "5d17c98cc24b37ed87696991ce60cac76353ff2b622d3043e7984b8289e82b2d",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/fish/functions/ls.fish",
+      "source": "~/.config/fish/functions/ls.fish",
+      "source_sha256": "68cd430faed88022d2f6bf966c391dc024694d06462eb624b7b2e4cad6007735",
+      "sha256": "68cd430faed88022d2f6bf966c391dc024694d06462eb624b7b2e4cad6007735",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/fish/functions/lt.fish",
+      "source": "~/.config/fish/functions/lt.fish",
+      "source_sha256": "4bf74ba2fa42294d55fd4546748eba6afe7c200a425e2abb9a54c4628f7800b8",
+      "sha256": "4bf74ba2fa42294d55fd4546748eba6afe7c200a425e2abb9a54c4628f7800b8",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/fish/functions/nvm.fish",
+      "source": "~/.config/fish/functions/nvm.fish",
+      "source_sha256": "136fcd0014df4b1e0de55d4e612d926be69b9d80b02a73de1b75ad141d312c69",
+      "sha256": "136fcd0014df4b1e0de55d4e612d926be69b9d80b02a73de1b75ad141d312c69",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/karabiner/karabiner.json",
+      "source": "~/.config/karabiner/karabiner.json",
+      "source_sha256": "84e7fe9f0f8033c64902d7e65395e75441cc75de072081c5621e9cda6775111a",
+      "sha256": "84e7fe9f0f8033c64902d7e65395e75441cc75de072081c5621e9cda6775111a",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/paw/config.json5",
+      "source": "~/.config/paw/config.json5",
+      "source_sha256": "0fb82fe48bb6f11a2148706200446d51daa3f9dcbb69749e370d2ca846eabb5a",
+      "sha256": "b50cfd76789adb7fda56c4f386bb6ed14c35ac8cbf3571ed5f60d7e278df6d9f",
+      "modified_for_v2": true
+    },
+    {
+      "path": "home/.config/sketchybar/colors.sh",
+      "source": "~/.config/sketchybar/colors.sh",
+      "source_sha256": "e8e3dacbeb349f3a71bf6f511a842cfe168a1318fba2c27cf924bb81c80335ac",
+      "sha256": "e8e3dacbeb349f3a71bf6f511a842cfe168a1318fba2c27cf924bb81c80335ac",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/helper/cpu.h",
+      "source": "~/.config/sketchybar/helper/cpu.h",
+      "source_sha256": "aa7d365a54d995ad4ff86d0f2e42cc8c20d70e9912a96548a8c100ba8e177808",
+      "sha256": "aa7d365a54d995ad4ff86d0f2e42cc8c20d70e9912a96548a8c100ba8e177808",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/helper/helper.c",
+      "source": "~/.config/sketchybar/helper/helper.c",
+      "source_sha256": "b9e056f850bd6d389623ae43e2cd420ee5ad39e42ad21f33ae9627ff7f1f6362",
+      "sha256": "b9e056f850bd6d389623ae43e2cd420ee5ad39e42ad21f33ae9627ff7f1f6362",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/helper/makefile",
+      "source": "~/.config/sketchybar/helper/makefile",
+      "source_sha256": "e344c26b25e66cde21598d050b1c8bce2a9873aa2dcd9d863928fd0e4336f095",
+      "sha256": "e344c26b25e66cde21598d050b1c8bce2a9873aa2dcd9d863928fd0e4336f095",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/helper/sketchybar.h",
+      "source": "~/.config/sketchybar/helper/sketchybar.h",
+      "source_sha256": "fb6647ca2496a4725a57fe3b81bb2e13f69816b08e65187044044c4e6242c3c5",
+      "sha256": "fb6647ca2496a4725a57fe3b81bb2e13f69816b08e65187044044c4e6242c3c5",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/icons.sh",
+      "source": "~/.config/sketchybar/icons.sh",
+      "source_sha256": "31caffd793bbd719962d5c24e1bce44d1b8a766c38e39e8565d37b500de2a05f",
+      "sha256": "31caffd793bbd719962d5c24e1bce44d1b8a766c38e39e8565d37b500de2a05f",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/items/apple.sh",
+      "source": "~/.config/sketchybar/items/apple.sh",
+      "source_sha256": "2894534a4957dbacde52f734feef121d01199bdf7ee4df6e23b986835eb49662",
+      "sha256": "4af5dc5d73164283b69ba58e365c11f7197377c03f6b0c2460d1711fc6f12460",
+      "modified_for_v2": true
+    },
+    {
+      "path": "home/.config/sketchybar/items/battery.sh",
+      "source": "~/.config/sketchybar/items/battery.sh",
+      "source_sha256": "b7b1226e7c36422ecd7f2d91b58c1847c2204a6ecac2cd176f276b176ef3b756",
+      "sha256": "b7b1226e7c36422ecd7f2d91b58c1847c2204a6ecac2cd176f276b176ef3b756",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/items/brew.sh",
+      "source": "~/.config/sketchybar/items/brew.sh",
+      "source_sha256": "30b0bf741acbee6f4b6c43a02bfab6e906c80b8b59ab81b9d5d711170ec316c4",
+      "sha256": "30b0bf741acbee6f4b6c43a02bfab6e906c80b8b59ab81b9d5d711170ec316c4",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/items/calendar.sh",
+      "source": "~/.config/sketchybar/items/calendar.sh",
+      "source_sha256": "9bdac18b9c216a6378709b50052a78045a8f62a4f6e896e279df4ec02f8f2ee6",
+      "sha256": "9bdac18b9c216a6378709b50052a78045a8f62a4f6e896e279df4ec02f8f2ee6",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/items/cpu.sh",
+      "source": "~/.config/sketchybar/items/cpu.sh",
+      "source_sha256": "ea9d32aa012f8431f0c9db8a90a239b969bbba386f72d57835555c3117d3d45d",
+      "sha256": "ea9d32aa012f8431f0c9db8a90a239b969bbba386f72d57835555c3117d3d45d",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/items/front_app.sh",
+      "source": "~/.config/sketchybar/items/front_app.sh",
+      "source_sha256": "a8e4d7712c8d446bc2840f5c32e719fd914b1739ac870fb02c52883476f7cdcb",
+      "sha256": "a8e4d7712c8d446bc2840f5c32e719fd914b1739ac870fb02c52883476f7cdcb",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/items/github.sh",
+      "source": "~/.config/sketchybar/items/github.sh",
+      "source_sha256": "f5df6810c0b4e77a218a531eab43463aebaba12670023ed6be3f92681a4f2b9f",
+      "sha256": "f5df6810c0b4e77a218a531eab43463aebaba12670023ed6be3f92681a4f2b9f",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/items/media.sh",
+      "source": "~/.config/sketchybar/items/media.sh",
+      "source_sha256": "47c50750bb83169f26416b5eb1d0f49295e52a13b9aeb5052f3e441f69b6952a",
+      "sha256": "47c50750bb83169f26416b5eb1d0f49295e52a13b9aeb5052f3e441f69b6952a",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/items/paw.sh",
+      "source": "~/.config/sketchybar/items/paw.sh",
+      "source_sha256": "5c3f923d12d387ca36aaff507c436d00e4689c07eec178d0e1e986187815c9c9",
+      "sha256": "5c3f923d12d387ca36aaff507c436d00e4689c07eec178d0e1e986187815c9c9",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/items/spotify.sh",
+      "source": "~/.config/sketchybar/items/spotify.sh",
+      "source_sha256": "a77cdcb68f2f54be0937056c9a86c56aa14435b0be4d274c9a8b565c6b309595",
+      "sha256": "a77cdcb68f2f54be0937056c9a86c56aa14435b0be4d274c9a8b565c6b309595",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/items/svim.sh",
+      "source": "~/.config/sketchybar/items/svim.sh",
+      "source_sha256": "49418c5b91158a02afe63642916b619f5977bb15d6634bb4fdc03c0d50b68296",
+      "sha256": "49418c5b91158a02afe63642916b619f5977bb15d6634bb4fdc03c0d50b68296",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/items/volume.sh",
+      "source": "~/.config/sketchybar/items/volume.sh",
+      "source_sha256": "c71cbcbcdd4cd542c13f183f2817bbd3c9588d1c179d2dcf8732ba478917e400",
+      "sha256": "c71cbcbcdd4cd542c13f183f2817bbd3c9588d1c179d2dcf8732ba478917e400",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/items/wifi.sh",
+      "source": "~/.config/sketchybar/items/wifi.sh",
+      "source_sha256": "54218848bf3997d2aa54477d3570f0eca52b9539c05493b47ff11133325808e2",
+      "sha256": "54218848bf3997d2aa54477d3570f0eca52b9539c05493b47ff11133325808e2",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/plugins/battery.sh",
+      "source": "~/.config/sketchybar/plugins/battery.sh",
+      "source_sha256": "6d2238062b00a387a27e402b0609f1c6400112f58c964cabee99db5f9d22fdf3",
+      "sha256": "6d2238062b00a387a27e402b0609f1c6400112f58c964cabee99db5f9d22fdf3",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/plugins/brew.sh",
+      "source": "~/.config/sketchybar/plugins/brew.sh",
+      "source_sha256": "7012b2f4ab340dd3de23ad1c5712ecc50633b97689664ef91565de88c2f114c9",
+      "sha256": "7012b2f4ab340dd3de23ad1c5712ecc50633b97689664ef91565de88c2f114c9",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/plugins/calendar.sh",
+      "source": "~/.config/sketchybar/plugins/calendar.sh",
+      "source_sha256": "93a475c113009a4a0357876f92eb5a18cb7dbba6b8ef4bcd0676bb4ea352ddcf",
+      "sha256": "93a475c113009a4a0357876f92eb5a18cb7dbba6b8ef4bcd0676bb4ea352ddcf",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/plugins/front_app.sh",
+      "source": "~/.config/sketchybar/plugins/front_app.sh",
+      "source_sha256": "d24fdc3e06fc7bd1111ef69010d73ce2190f284718c741c0ea0ceda1241df407",
+      "sha256": "d24fdc3e06fc7bd1111ef69010d73ce2190f284718c741c0ea0ceda1241df407",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/plugins/github.sh",
+      "source": "~/.config/sketchybar/plugins/github.sh",
+      "source_sha256": "5dbf25f36f92b106ce3164f3859c75acfb46024e72a8e4830193498a74557f91",
+      "sha256": "5dbf25f36f92b106ce3164f3859c75acfb46024e72a8e4830193498a74557f91",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/plugins/icon_map.sh",
+      "source": "~/.config/sketchybar/plugins/icon_map.sh",
+      "source_sha256": "4dfe34051e0f90831c2c9e9f9ffc80348722b77fc38c5954833958d5ad31e540",
+      "sha256": "4dfe34051e0f90831c2c9e9f9ffc80348722b77fc38c5954833958d5ad31e540",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/plugins/media.sh",
+      "source": "~/.config/sketchybar/plugins/media.sh",
+      "source_sha256": "a0c3ade1abe4a8ef8e1d57e8595053c706ceb1b75801a98bb89f5c32f442167d",
+      "sha256": "a0c3ade1abe4a8ef8e1d57e8595053c706ceb1b75801a98bb89f5c32f442167d",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/plugins/paw.sh",
+      "source": "~/.config/sketchybar/plugins/paw.sh",
+      "source_sha256": "5d4f54b8e512a4b2af1e0e681084ac37008ea8cc49ef5032c5e8772cbe916dab",
+      "sha256": "5d4f54b8e512a4b2af1e0e681084ac37008ea8cc49ef5032c5e8772cbe916dab",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/plugins/spotify.sh",
+      "source": "~/.config/sketchybar/plugins/spotify.sh",
+      "source_sha256": "f167fce223cce76520923ae8027fa3a68837d01643276a558740afa13a1848ed",
+      "sha256": "f167fce223cce76520923ae8027fa3a68837d01643276a558740afa13a1848ed",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/plugins/svim.sh",
+      "source": "~/.config/sketchybar/plugins/svim.sh",
+      "source_sha256": "5fe4769574fbfe75d288813294082636b3004d1b6ba8a44f96af714d0d654fea",
+      "sha256": "5fe4769574fbfe75d288813294082636b3004d1b6ba8a44f96af714d0d654fea",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/plugins/volume.sh",
+      "source": "~/.config/sketchybar/plugins/volume.sh",
+      "source_sha256": "40ac99f607f4da5b12eb9a976e85e09d3d3271a71f635897e524e226423711a5",
+      "sha256": "40ac99f607f4da5b12eb9a976e85e09d3d3271a71f635897e524e226423711a5",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/plugins/volume_click.sh",
+      "source": "~/.config/sketchybar/plugins/volume_click.sh",
+      "source_sha256": "e3a66d2a50cd89f9ced5f02e3e6665ae9b127f164e44829e7a1e787e5ed8cb6d",
+      "sha256": "e3a66d2a50cd89f9ced5f02e3e6665ae9b127f164e44829e7a1e787e5ed8cb6d",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/plugins/wifi.sh",
+      "source": "~/.config/sketchybar/plugins/wifi.sh",
+      "source_sha256": "456b137a8aafe901ca521a932588d82dcf562a827014cda8a5366f7de76d46f0",
+      "sha256": "0f837e637e95860669df388209a2eb4d95557b8e404198769ae674ebdd1a856f",
+      "modified_for_v2": true
+    },
+    {
+      "path": "home/.config/sketchybar/plugins/zen.sh",
+      "source": "~/.config/sketchybar/plugins/zen.sh",
+      "source_sha256": "e2f149d95ef8b2d58aeb1e31fabcd951bf06ff4d64c08353502c97a0db511b4e",
+      "sha256": "e2f149d95ef8b2d58aeb1e31fabcd951bf06ff4d64c08353502c97a0db511b4e",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.config/sketchybar/sketchybarrc",
+      "source": "~/.config/sketchybar/sketchybarrc",
+      "source_sha256": "7da9e23d586d472004983caf508d3c7fdf20d8b808e03e09f89ad9072f6ea9c2",
+      "sha256": "8341d32cabc92ae325ca403b9efe179f1fd9f2dc8771a0499e988f278cce52a6",
+      "modified_for_v2": true
+    },
+    {
+      "path": "home/.config/starship.toml",
+      "source": "~/.config/starship.toml",
+      "source_sha256": "1044eb1258a09707abf81ecf007e547b06f2e8c10a6beaa62d098ebc58dea52a",
+      "sha256": "1044eb1258a09707abf81ecf007e547b06f2e8c10a6beaa62d098ebc58dea52a",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.zprofile",
+      "source": "~/.zprofile",
+      "source_sha256": "aa7829da6536e747ae3a45666ea5c0392dee0f45da0cac36a1d26643d5af2bb3",
+      "sha256": "aa7829da6536e747ae3a45666ea5c0392dee0f45da0cac36a1d26643d5af2bb3",
+      "modified_for_v2": false
+    },
+    {
+      "path": "home/.zshrc",
+      "source": "~/.zshrc",
+      "source_sha256": "b5a262051c667e9ff65b4ec98cccd02e8953cf06ada9629f08be25fca4aa1f5d",
+      "sha256": "e76ec36e03975f592ea65cb6181dff682a616668f1b8ff7fd638c4519b624ca2",
+      "modified_for_v2": true
+    }
+  ]
+}

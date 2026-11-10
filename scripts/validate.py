@@ -28,31 +28,20 @@ def private_path(path):
     )
 
 
-def validate():
+def validate_snapshot(profile):
     errors = []
-    inventory = json.loads((PROFILE / "inventory.json").read_text())
-    tree = subprocess.check_output(
-        ["git", "ls-tree", "-rz", inventory["legacy_base_commit"]], cwd=ROOT
-    )
-    legacy_records = [record.split(b"\t", 1) for record in tree.split(b"\0") if record]
-    inherited = {"archive/legacy-2023/" + name.decode() for _, name in legacy_records}
-    paths = subprocess.check_output(
-        ["git", "ls-files", "-z", "--cached", "--others", "--exclude-standard"], cwd=ROOT
-    ).decode().split("\0")
-    for path in filter(None, paths):
-        # Existing archived state is retained only with its original content, checked below.
-        if private_path(path) and path not in inherited:
-            errors.append(f"Private/generated path must not be published: {path}")
-
+    if profile.is_symlink() or (profile / "home").is_symlink():
+        raise ValueError("Snapshot roots must not be symlinks")
+    inventory = json.loads((profile / "inventory.json").read_text())
     recorded = set()
     for entry in inventory["files"]:
         relative = pathlib.PurePosixPath(entry["path"])
-        if relative.is_absolute() or ".." in relative.parts or relative.parts[0] != "home":
+        if not relative.parts or relative.is_absolute() or ".." in relative.parts or relative.parts[0] != "home":
             errors.append(f"Invalid inventory path: {relative}")
             continue
         if private_path(str(relative)):
             errors.append(f"Private/generated path in snapshot inventory: {relative}")
-        path = PROFILE / relative
+        path = profile / relative
         if str(relative) in recorded:
             errors.append(f"Duplicate inventory path: {relative}")
         recorded.add(str(relative))
@@ -70,13 +59,42 @@ def validate():
                 tomllib.loads(text)
         except (UnicodeDecodeError, ValueError) as error:
             errors.append(f"Invalid snapshot source {relative}: {type(error).__name__}")
-    home_paths = list((PROFILE / "home").rglob("*"))
+    home_paths = list((profile / "home").rglob("*"))
     for path in home_paths:
         if path.is_symlink():
-            errors.append(f"Unsupported snapshot symlink: {path.relative_to(PROFILE)}")
-    actual = {str(path.relative_to(PROFILE)) for path in home_paths if path.is_file()}
+            errors.append(f"Unsupported snapshot symlink: {path.relative_to(profile)}")
+    actual = {str(path.relative_to(profile)) for path in home_paths if path.is_file()}
     if actual != recorded:
         errors.append(f"Snapshot inventory mismatch: {sorted(actual ^ recorded)}")
+
+    if errors:
+        raise ValueError("\n".join(errors))
+    return inventory["files"]
+
+
+def validate():
+    errors = []
+    inventory = json.loads((PROFILE / "inventory.json").read_text())
+    tree = subprocess.check_output(
+        ["git", "ls-tree", "-rz", inventory["legacy_base_commit"]], cwd=ROOT
+    )
+    legacy_records = [record.split(b"\t", 1) for record in tree.split(b"\0") if record]
+    inherited = {"archive/legacy-2023/" + name.decode() for _, name in legacy_records}
+    paths = subprocess.check_output(
+        ["git", "ls-files", "-z", "--cached", "--others", "--exclude-standard"], cwd=ROOT
+    ).decode().split("\0")
+    for path in filter(None, paths):
+        # Existing archived state is retained only with its original content, checked below.
+        if private_path(path) and path not in inherited:
+            errors.append(f"Private/generated path must not be published: {path}")
+
+    snapshot_count = 0
+    profiles = [PROFILE] + [p.parent for p in (ROOT / "profiles/macos").glob("*/inventory.json") if p.parent != PROFILE]
+    for profile in profiles:
+        try:
+            snapshot_count += len(validate_snapshot(profile))
+        except ValueError as error:
+            errors.append(str(error))
 
     # Compare Git blob hashes so binary wallpapers are preserved as well as text files.
     legacy_count = 0
@@ -94,7 +112,7 @@ def validate():
 
     if errors:
         raise SystemExit("\n".join(errors))
-    print(f"Validated {len(recorded)} Mac snapshot files and {legacy_count} unchanged legacy files; no blocked paths.")
+    print(f"Validated {snapshot_count} Mac snapshot files and {legacy_count} unchanged legacy files; no blocked paths.")
 
 
 if __name__ == "__main__":
