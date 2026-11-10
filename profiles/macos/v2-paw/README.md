@@ -1,8 +1,8 @@
-# macOS v2 — PAW restore candidate
+# macOS v2 — PAW baseline
 
-A 55-file PAW desktop profile for this Apple Silicon Mac, captured on **2026-11-10**. Copies, backups and rollback are tested against disposable directories. A fresh macOS install and physical keyboard behavior have **not** been tested; this is a restore candidate, not a complete machine image.
+A 55-file PAW desktop profile for this Apple Silicon Mac, captured and activated on **2026-11-10**. PAW trust/binding health and bar state were checked. Copies, backups and rollback are tested against disposable directories. A fresh macOS install and physical keyboard behavior have **not** been tested.
 
-[Same-Mac v1/v2 recovery](SWITCHING.md) · [Fresh-install steps](RESTORE.md) · [Dependencies](Brewfile) · [Source inventory](inventory.json)
+[Experiments and debugging](DEBUGGING.md) · [Same-Mac v1/v2 recovery](SWITCHING.md) · [Fresh-install steps](RESTORE.md) · [Dependencies](Brewfile) · [Source inventory](inventory.json)
 
 ## Included
 
@@ -14,7 +14,7 @@ A 55-file PAW desktop profile for this Apple Silicon Mac, captured on **2026-11-
 
 For experiments, `--profile v1-yabai` copies the preserved pre-PAW files; `--profile v2-paw` copies this candidate (the default). Follow the same-Mac recovery guide to stop one desktop and start the other. The tool does not switch services or login items. Clean-install testing is deferred; restoring the important apps and their selected configuration is the intended later scope.
 
-The original v1 snapshot and all 221 archived files remain unchanged. `inventory.json` records source and published hashes, the PAW source revision and which files differ from the live source. This branch has not been applied to the working desktop.
+The original v1 configuration snapshot and all 221 archived files remain unchanged. `inventory.json` records source and published hashes, the PAW source revision and changes relative to the pre-activation live source. Activation replaced seven files after saving them to a private recovery directory. The active PAW config matches this saved baseline; legacy managers are stopped and their known login entries disabled.
 
 ## Deliberate v2 changes
 
