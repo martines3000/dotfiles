@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dotfiles: archive, Mac v1, and next profiles</title>
+<style>
+:root { color-scheme: light dark; }
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--foreground, light-dark(#20232b,#e9edf5)); font-family: var(--font-sans, system-ui, sans-serif); font-size: 14px; line-height: 1.55; }
+main { max-width: 960px; margin: 0 auto; }
+h1 { font-size: 25px; line-height: 1.2; margin: 0 0 8px; letter-spacing: -.5px; }
+h2 { font-size: 17px; margin: 0 0 12px; }
+h3 { font-size: 15px; margin: 0 0 6px; }
+p { margin: 0 0 10px; }
+a { color: var(--primary, light-dark(#235eb8,#97bbff)); text-underline-offset: 3px; }
+code, pre { font-family: var(--font-mono, ui-monospace, monospace); }
+code { font-size: .9em; overflow-wrap: anywhere; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; margin: 0; line-height: 1.8; }
+section { margin-top: 24px; }
+.muted { color: var(--muted-foreground, light-dark(#5d6573,#a9b2c2)); }
+.eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.cards { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
+.card, .tree, .note { padding: 16px; background: var(--card, light-dark(#f5f7fa,#1d2430)); border-radius: var(--radius,10px); }
+.tag { display: inline-block; font-size: 11px; border: 1px solid var(--border,light-dark(#ced6e1,#465165)); padding: 2px 7px; border-radius: 99px; margin-bottom: 10px; }
+.cards p { font-size: 13px; }
+.cards p:last-child { margin-bottom: 0; }
+.tree { border-left: 3px solid var(--chart-1, #6496e8); }
+.chart { display: flex; height: 12px; gap: 3px; margin: 12px 0; }
+.chart span { border-radius: 3px; }
+.c1 { background: var(--chart-1,#6496e8); }
+.c2 { background: var(--chart-2,#73b6a0); }
+.c3 { background: var(--chart-3,#bb94d6); }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 12px; }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; }
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; text-align: left; }
+th { color: var(--muted-foreground,light-dark(#5d6573,#a9b2c2)); font-weight: 500; }
+th,td { border-bottom: 1px solid var(--border,light-dark(#dce2ea,#374252)); padding: 9px 8px 9px 0; vertical-align: top; }
+td:last-child,th:last-child { padding-right: 0; }
+details { border-bottom: 1px solid var(--border,light-dark(#dce2ea,#374252)); padding: 11px 0; }
+summary { font-weight: 600; }
+details p { margin: 9px 0 0 18px; }
+ol,ul { padding-left: 20px; margin: 8px 0; }
+li { margin-bottom: 7px; }
+.checks { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.checks span { border: 1px solid var(--border,light-dark(#dce2ea,#374252)); border-radius: 6px; padding: 5px 8px; font-size: 12px; }
+footer { border-top: 1px solid var(--border,light-dark(#dce2ea,#374252)); padding: 14px 0; margin-top: 24px; font-size: 12px; }
+@media(max-width:560px) { .cards { grid-template-columns: 1fr; } h1 { font-size: 22px; } th,td { font-size: 12px; } }
+@media print { details { break-inside: avoid; } main { max-width: none; } }
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow muted">Repository audit · 10 November 2026</div>
+  <h1>Dotfiles: preserve the old setup, separate the next ones</h1>
+  <p class="muted">A reviewable change for <a href="https://github.com/martines3000/dotfiles">martines3000/dotfiles</a>. This PR records configuration; it does not deploy anything to the Mac or homelab.</p>
+
+  <section aria-label="Profile boundaries">
+    <div class="cards">
+      <article class="card"><span class="tag">Included now</span><h3>macOS v1 · yabai</h3><p>60 reviewed files: the pre-PAW window-manager setup and its terminal, shell and keyboard companions.</p><p class="muted">A historical snapshot with provenance, not a tested fresh install.</p></article>
+      <article class="card"><span class="tag">Follow-up</span><h3>macOS v2 · PAW</h3><p>A separate home for the working PAW setup, familiar shortcuts and PAW-aware Sketchybar.</p><p class="muted">Plan only. No active PAW files imported.</p></article>
+      <article class="card"><span class="tag">Later inventory</span><h3>Linux · Omarchy homelab</h3><p>User-owned desktop overrides for the PC, separated from Mac configuration and service infrastructure.</p><p class="muted">Plan only. The host has not been accessed.</p></article>
+    </div>
+  </section>
+
+  <section>
+    <h2>The repository structure</h2>
+    <div class="tree"><pre>archive/legacy-2023/
+profiles/
+  macos/v1-yabai/
+    home/
+    inventory.json
+  macos/v2-paw/
+  linux/omarchy-homelab/
+docs/
+scripts/validate.py
+.github/workflows/</pre></div>
+    <p class="muted" style="margin-top:10px">The old root README, Fish files, themes, wallpapers and previews move together. Their contents and relative layout are preserved. No shared-config layer or installer is introduced yet.</p>
+  </section>
+
+  <section>
+    <h2>What the Mac v1 snapshot includes</h2>
+    <div class="chart" role="img" aria-label="60 snapshot files: 37 Sketchybar, 17 Fish and Zsh, and 6 other configuration files."><span class="c1" style="flex:37"></span><span class="c2" style="flex:17"></span><span class="c3" style="flex:6"></span></div>
+    <div class="legend"><span><i class="dot c1" aria-hidden="true"></i>Sketchybar · 37</span><span><i class="dot c2" aria-hidden="true"></i>Fish + Zsh · 17</span><span><i class="dot c3" aria-hidden="true"></i>Other configuration · 6</span></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th scope="col">Component</th><th scope="col">Capture decision</th></tr></thead>
+      <tbody>
+        <tr><td>yabai + skhd</td><td>Original <code>.yabairc</code> and <code>.skhdrc</code> from the pre-PAW backup, plus the presentation-mode script.</td></tr>
+        <tr><td>Sketchybar</td><td>Original entry point from that backup; unchanged item/plugin scripts and helper source. Excludes PAW additions and the compiled helper.</td></tr>
+        <tr><td>Karabiner</td><td>The reviewed <code>karabiner.json</code>: Caps Lock mapping, keyboard-specific modifier swaps and ISO layout. No automatic backups.</td></tr>
+        <tr><td>Alacritty + Starship</td><td>Terminal appearance, shell choice, editing shortcuts and prompt configuration.</td></tr>
+        <tr><td>Fish + Zsh</td><td>Initialization and source functions. Excludes universal variables and generated completions. Home paths normalized in three files.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="muted" style="margin-top:10px">The three main window-manager files have pre-PAW backup provenance. Companion files were collected during this audit; this is not a complete point-in-time Mac image.</p>
+  </section>
+
+  <section>
+    <h2>Findings to resolve in later profiles</h2>
+    <details><summary>Caps Lock does not send the chord its description promises</summary><p>Karabiner sends Cmd+Ctrl+Shift+Fn, without Option. Standard Hyper is Cmd+Ctrl+Option+Shift. Preserve the original in v1, then choose the intended chord and test PAW bindings on the actual keyboards in v2.</p></details>
+    <details><summary>Some Sketchybar integrations are obsolete</summary><p>The Wi-Fi widget calls the removed macOS <code>airport</code> executable, and the Apple menu refers to System Preferences. The historical profile keeps them as found. Repair these when preparing the active PAW profile.</p></details>
+    <details><summary>Shell initialization has accumulated several toolchains</summary><p>Fish/Zsh reference fnm, nvm, Miniconda, Jabba, SDKMAN, RVM and Android tools. A Fish fnm path even pointed to a Linux home directory. Only home-path normalization was applied here; simplify intentionally in v2 before claiming a reproducible install.</p></details>
+    <details><summary>Omarchy needs its own version-aware inventory</summary><p>The current official manual uses a different configuration layout from older Omarchy releases. Determine the PC's installed generation first. Capture user-owned overrides, not the whole Omarchy installation, private host topology or service secrets. <a href="https://omarchy.org/manual/dotfiles/">Official dotfiles guidance</a>.</p></details>
+    <details><summary>The archive includes four already-published generated files</summary><p>Three old Fish universal-variable files and one Alacritty backup are retained to preserve all original files. Their contents were reviewed and scanned. Integrity checks forbid silently changing them; new profiles exclude this state.</p></details>
+  </section>
+
+  <section>
+    <h2>The public boundary</h2>
+    <div class="note"><p><strong>Explicitly excluded:</strong> all SSH config and keys; API tokens and authentication state; histories and Fish universal variables; browser/AI sessions; machine-generated LaunchAgent plists; cloud/VPN/Kubernetes credentials; private homelab addresses; caches, logs and binaries.</p><p class="muted" style="margin:0">Use a narrow allowlist, manual review and a secret scan before every push. CI is an additional check after publication, not a way to keep an uploaded secret private.</p></div>
+  </section>
+
+  <section>
+    <h2>Checks and next steps</h2>
+    <div class="checks"><span>221 originals verified unchanged</span><span>60 files checksummed</span><span>4 validator tests passed</span><span>Tree + history: no secret matches</span></div>
+    <ol>
+      <li><strong>This PR:</strong> archive the old tree, preserve Mac v1 with provenance, add profile boundaries, documentation and validation.</li>
+      <li><strong>Next Mac PR:</strong> snapshot and test PAW, settle the Caps Lock chord, fix stale widgets, and define an opt-in restore/startup workflow.</li>
+      <li><strong>Next Linux PR:</strong> inventory the Omarchy PC, review its overrides and extra packages, and test a separate profile without exposing host credentials.</li>
+    </ol>
+    <p class="muted">Imported shell syntax, JSON/TOML and helper C source are checked without executing the desktop configuration. No fresh-machine restore, physical key test, OS permission restoration or homelab deployment has been performed.</p>
+  </section>
+  <footer class="muted">Source: the existing repository, the Mac's pre-PAW backup, reviewed local configuration, and the linked official Omarchy documentation. Snapshot paths and checksums are recorded in <code>profiles/macos/v1-yabai/inventory.json</code>. No report data is fetched from the network.</footer>
+</main>
+</body>
+</html>
