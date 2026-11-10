@@ -267,7 +267,7 @@
       "path": "home/.config/sketchybar/items/wifi.sh",
       "source": "~/.config/sketchybar/items/wifi.sh",
       "source_sha256": "54218848bf3997d2aa54477d3570f0eca52b9539c05493b47ff11133325808e2",
-      "sha256": "a4c75f71c35c10b47bdc930128fabfd39ae4f2e4c40137d765ad1cd8f397d5a8",
+      "sha256": "2477d80f1f97f379988cb0f06a08ad13d0bf1397d15196322e339e899f8efb2e",
       "modified_for_v2": true
     },
     {
@@ -365,7 +365,7 @@
       "path": "home/.config/sketchybar/plugins/wifi.sh",
       "source": "~/.config/sketchybar/plugins/wifi.sh",
       "source_sha256": "456b137a8aafe901ca521a932588d82dcf562a827014cda8a5366f7de76d46f0",
-      "sha256": "be343399072d21409cde1a461610d7fe019b7556caf58ccaf331698f233e0f9d",
+      "sha256": "0e95cda72fa4003e8682bfc2a3807d9f414ceae966973107cb0790c6ec79fd6d",
       "modified_for_v2": true
     },
     {
@@ -379,7 +379,7 @@
       "path": "home/.config/sketchybar/sketchybarrc",
       "source": "~/.config/sketchybar/sketchybarrc",
       "source_sha256": "7da9e23d586d472004983caf508d3c7fdf20d8b808e03e09f89ad9072f6ea9c2",
-      "sha256": "a2cbb92f934d09af8ef241532c3f8ecf85b8c729899158bfa8b20518d7efb2ea",
+      "sha256": "25ab1fec5136f57637e9f9fb327a435abaa4fb8600922cac3408faa306073a6d",
       "modified_for_v2": true
     },
     {

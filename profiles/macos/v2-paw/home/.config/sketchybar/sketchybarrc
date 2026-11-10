@@ -72,7 +72,7 @@ source "$ITEM_DIR/wifi.sh"
 source "$ITEM_DIR/battery.sh"
 source "$ITEM_DIR/volume.sh"
 source "$ITEM_DIR/cpu.sh"
-island system.island right wifi battery volume volume_icon cpu.percent
+island system.island right wifi vpn battery volume volume_icon cpu.percent
 
 sketchybar --hotload on
 sketchybar --update
