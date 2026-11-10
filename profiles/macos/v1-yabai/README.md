@@ -57,4 +57,4 @@ The terminal uses JetBrainsMono Nerd Font; bar labels use sketchybar-app-font an
 4. Grant required macOS permissions and configure startup on that machine. Machine-generated LaunchAgent plists were deliberately omitted.
 5. Test terminal startup, actual keyboard chords, display/Space behavior, bar widgets and resize mode before making this the login setup.
 
-No bulk restore command is provided: this is a historical profile with known incompatibilities, and an automatic restore could replace the current working desktop.
+The current copy tool supports `python3 scripts/restore_macos.py --profile v1-yabai` (preview) and the same command with `--apply` (back up and copy). Follow the [same-Mac recovery guide](../v2-paw/SWITCHING.md) for stopping PAW and reactivating the existing yabai/skhd services. The saved configuration still has the compatibility limits above; service switching and login items remain manual.

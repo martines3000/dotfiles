@@ -2,7 +2,7 @@
 
 A 55-file PAW desktop profile for this Apple Silicon Mac, captured on **2026-11-10**. Copies, backups and rollback are tested against disposable directories. A fresh macOS install and physical keyboard behavior have **not** been tested; this is a restore candidate, not a complete machine image.
 
-[Fresh-install steps](RESTORE.md) · [Dependencies](Brewfile) · [Source inventory](inventory.json)
+[Same-Mac v1/v2 recovery](SWITCHING.md) · [Fresh-install steps](RESTORE.md) · [Dependencies](Brewfile) · [Source inventory](inventory.json)
 
 ## Included
 
@@ -11,6 +11,8 @@ A 55-file PAW desktop profile for this Apple Silicon Mac, captured on **2026-11-
 - Karabiner's existing device mappings, Alacritty, Fish, Starship and Zsh configuration.
 - A curated Brewfile for the desktop, shell and fonts. It does not dump all installed developer tools or start services.
 - A preview-first copy command with checksum checks, symlink refusal, private backups and rollback. No link manager is required.
+
+For experiments, `--profile v1-yabai` copies the preserved pre-PAW files; `--profile v2-paw` copies this candidate (the default). Follow the same-Mac recovery guide to stop one desktop and start the other. The tool does not switch services or login items. Clean-install testing is deferred; restoring the important apps and their selected configuration is the intended later scope.
 
 The original v1 snapshot and all 221 archived files remain unchanged. `inventory.json` records source and published hashes, the PAW source revision and which files differ from the live source. This branch has not been applied to the working desktop.
 

@@ -2,6 +2,8 @@
 
 This restores selected desktop configuration on an Apple Silicon Mac. It does not restore documents, credentials, app sessions or all development environments. Keep a separate full backup before erasing a Mac. Start with a disposable target; a clean-macOS test is still pending.
 
+For PAW experiments on the current Mac, use the [same-Mac switch-back guide](SWITCHING.md). Clean-install testing is deferred; the later goal is the important applications and selected configs rather than exact machine replication.
+
 ## 1. Prepare the tools and packages
 
 Install Apple's Command Line Tools (`xcode-select --install`) and Homebrew using the [official instructions](https://brew.sh/). Open a new shell with `/opt/homebrew/bin` on PATH, then clone this **public** repository:
@@ -33,7 +35,7 @@ On an existing Mac, quit PAW, stop Sketchybar and quit Karabiner before applying
 python3 scripts/restore_macos.py --apply
 ```
 
-The recovery directory is printed after copying. Existing files are backed up and a receipt is written before destination changes. Other files are left alone; nothing removes yabai/skhd, their configs or unrelated applications. Files are copied atomically one at a time, so an I/O failure can still interrupt a multi-file restore. Keep the recovery record until the desktop is verified.
+The recovery directory is printed before destination changes. Existing files are backed up and a receipt is written before destination changes. Other files are left alone; nothing removes yabai/skhd, their configs or unrelated applications. Files are copied atomically one at a time, so an I/O failure can still interrupt a multi-file restore. Keep the recovery record until the desktop is verified.
 
 ## 3. Install PAW separately
 

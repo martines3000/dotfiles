@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Preview/copy macOS v2 configuration; never install packages or start services."""
+"""Preview/copy a saved macOS profile; never install packages or start services."""
 
 import argparse
 import datetime
@@ -49,17 +49,18 @@ def copy_atomic(source, destination):
         temporary.unlink(missing_ok=True)
 
 
-def restore(target, apply=False):
+def restore(target, apply=False, profile=None):
+    profile = profile or PROFILE
     target = pathlib.Path(target).expanduser().resolve()
     if target.is_relative_to(ROOT):
         raise ValueError("The restore target must be outside this repository")
     if target == pathlib.Path.home().resolve() and apply and sys.platform != "darwin":
         raise ValueError("Restoring the real home directory requires macOS")
     changes = []
-    for entry in validate_snapshot(PROFILE):
+    for entry in validate_snapshot(profile):
         relative = pathlib.Path(entry["path"]).relative_to("home")
         destination = check_destination(target, relative)
-        source = PROFILE / entry["path"]
+        source = profile / entry["path"]
         after_mode = stat.S_IMODE(source.stat().st_mode)
         if destination.exists() and digest(destination) == entry["sha256"] and (destination.stat().st_mode & 0o111) == (after_mode & 0o111):
             continue
@@ -76,7 +77,7 @@ def restore(target, apply=False):
     backup_root.mkdir(parents=True, exist_ok=True)
     backup = pathlib.Path(tempfile.mkdtemp(prefix=datetime.datetime.now().strftime("%Y%m%d-%H%M%S-"), dir=backup_root))
     backup.chmod(0o700)
-    receipt = {"target": str(target), "files": []}
+    receipt = {"target": str(target), "profile": profile.name, "files": []}
     for relative, source, destination, before, after, before_mode, after_mode in changes:
         receipt["files"].append({"path": str(relative), "before": before, "after": after, "before_mode": before_mode, "after_mode": after_mode})
         if before:
@@ -137,13 +138,15 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--target", type=pathlib.Path, default=pathlib.Path.home(), help="Destination home directory; use a disposable directory for testing")
     parser.add_argument("--apply", action="store_true", help="Copy files after preflight; default is preview only")
-    parser.add_argument("--rollback", type=pathlib.Path, help="Preview/undo an unchanged restore using its recovery directory")
+    operation = parser.add_mutually_exclusive_group()
+    operation.add_argument("--profile", choices=["v1-yabai", "v2-paw"], default="v2-paw", help="Saved profile to copy; default: v2-paw")
+    operation.add_argument("--rollback", type=pathlib.Path, help="Preview/undo an unchanged copy using its recovery directory")
     args = parser.parse_args()
     try:
         if args.rollback:
             rollback(args.target, args.rollback, args.apply)
         else:
-            restore(args.target, args.apply)
+            restore(args.target, args.apply, ROOT / "profiles/macos" / args.profile)
     except (ValueError, OSError, KeyError) as error:
         parser.exit(1, f"Restore stopped: {error}\n")
 

@@ -3,6 +3,8 @@ import hashlib
 import io
 import json
 import pathlib
+import subprocess
+import sys
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -80,6 +82,19 @@ class MacRestoreTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "outside this repository"):
             restore_macos.restore(restore_macos.ROOT, apply=True)
 
+    def test_explicit_profile_uses_its_source_and_records_selection(self):
+        older = self.root / "v1-yabai"
+        (older / "home").mkdir(parents=True)
+        source = older / "home/.zshrc"
+        source.write_text("older shell\n")
+        (older / "inventory.json").write_text(json.dumps({"files": [{"path": "home/.zshrc", "sha256": hashlib.sha256(source.read_bytes()).hexdigest()}]}))
+        backup = restore_macos.restore(self.target, apply=True, profile=older)
+        self.assertEqual(self.original.read_text(), "older shell\n")
+        self.assertFalse((self.target / ".config/example/settings.toml").exists())
+        self.assertEqual(json.loads((backup / "receipt.json").read_text())["profile"], "v1-yabai")
+        restore_macos.rollback(self.target, backup, apply=True)
+        self.assertEqual(self.original.read_text(), "original shell\n")
+
     def test_same_bytes_with_different_mode_are_restored_and_reversible(self):
         self.original.write_text("new shell\n")
         self.original.chmod(0o600)
@@ -97,6 +112,47 @@ class MacRestoreTests(unittest.TestCase):
         (rogue / "receipt.json").write_text(json.dumps({"target": str(self.target), "files": []}))
         with self.assertRaisesRegex(ValueError, "inside its target"):
             restore_macos.rollback(self.target, base / "../rogue", apply=True)
+
+
+class SavedProfileRoundTripTests(unittest.TestCase):
+    def test_saved_v2_to_v1_and_undo_preserves_experiments_and_other_data(self):
+        profiles = restore_macos.ROOT / "profiles/macos"
+        with tempfile.TemporaryDirectory() as temporary, contextlib.redirect_stdout(io.StringIO()):
+            target = pathlib.Path(temporary).resolve()
+            restore_macos.restore(target, apply=True, profile=profiles / "v2-paw")
+            bar = target / ".config/sketchybar/sketchybarrc"
+            bar.write_text(bar.read_text() + "\n# experimental bar setting\n")
+            paw = target / ".config/paw/config.json5"
+            paw.write_text(paw.read_text() + "\n// experimental PAW setting\n")
+            v2 = json.loads((profiles / "v2-paw/inventory.json").read_text())["files"]
+            before = {entry["path"]: (target / pathlib.Path(entry["path"]).relative_to("home")).read_bytes() for entry in v2}
+            unrelated = target / "personal-document.txt"
+            unrelated.write_text("unrelated content\n")
+
+            backup = restore_macos.restore(target, apply=True, profile=profiles / "v1-yabai")
+            v1 = json.loads((profiles / "v1-yabai/inventory.json").read_text())["files"]
+            for entry in v1:
+                destination = target / pathlib.Path(entry["path"]).relative_to("home")
+                self.assertEqual(hashlib.sha256(destination.read_bytes()).hexdigest(), entry["sha256"])
+            self.assertEqual(paw.read_bytes(), before["home/.config/paw/config.json5"])
+            self.assertIsNone(restore_macos.restore(target, apply=True, profile=profiles / "v1-yabai"))
+            restore_macos.rollback(target, backup, apply=True)
+            for path, content in before.items():
+                self.assertEqual((target / pathlib.Path(path).relative_to("home")).read_bytes(), content)
+            self.assertFalse((target / ".skhdrc").exists())
+            self.assertEqual(unrelated.read_text(), "unrelated content\n")
+
+    def test_cli_v1_preview_and_invalid_profile_selection(self):
+        script = pathlib.Path(restore_macos.__file__)
+        with tempfile.TemporaryDirectory() as temporary:
+            preview = subprocess.run([sys.executable, str(script), "--profile", "v1-yabai", "--target", temporary], capture_output=True, text=True)
+            self.assertEqual(preview.returncode, 0, preview.stderr)
+            self.assertIn(".skhdrc", preview.stdout)
+            self.assertNotIn(".config/paw/config.json5", preview.stdout)
+            self.assertFalse(list(pathlib.Path(temporary).iterdir()))
+            for arguments in [["--profile", "../other"], ["--profile", "v1-yabai", "--rollback", temporary]]:
+                result = subprocess.run([sys.executable, str(script), *arguments, "--target", temporary], capture_output=True, text=True)
+                self.assertEqual(result.returncode, 2)
 
 
 if __name__ == "__main__":

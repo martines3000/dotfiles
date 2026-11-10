@@ -28,7 +28,9 @@ scripts/validate.py              # read-only integrity and file-boundary checks
 
 ## Using a profile
 
-The live Mac configuration is separate from this checkout. V1 is a historical snapshot with manual restore notes. [V2 has a fresh-install guide](profiles/macos/v2-paw/RESTORE.md) and a copy command that previews by default; package installation and activation remain separate manual steps. No checkout or merge deploys a desktop automatically.
+The live Mac configuration is separate from this checkout. V1 is a historical snapshot. The copy tool previews either saved profile by default; package installation and activation remain separate manual steps. [V2's fresh-install guide](profiles/macos/v2-paw/RESTORE.md) records the later clean-install work. No checkout or merge deploys a desktop automatically.
+
+For daily PAW/Sketchybar experiments, use the [same-Mac v1/v2 recovery guide](profiles/macos/v2-paw/SWITCHING.md). `--profile v1-yabai` returns selected files to the pre-PAW snapshot with backups of current edits; it does not wipe the Mac or start/stop desktop services. Clean-install testing is deferred.
 
 Choose one profile and read its README before copying anything. Do not link the whole `profiles/` tree, combine v1 and v2 window managers, or treat the archive as a current setup. Keep each profile self-contained until there is a proven reason to share a file between systems.
 
