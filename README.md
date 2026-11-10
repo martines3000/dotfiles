@@ -11,6 +11,8 @@ Versioned desktop configurations, with old setups kept for reference.
 
 See the [restructure report](docs/restructure-report.html) for the inventory, findings and next steps. Download/open the HTML file to view it; GitHub's file view shows its source.
 
+The [structure research](docs/dotfiles-structure-research.md) compares four real repositories and reviewed copies, Stow and chezmoi. The recommendation is to keep explicit profiles now, separate configuration deployment from package/service setup, and select deployment tooling only after the active profiles and application write behavior have been tested.
+
 ```text
 archive/legacy-2023/             # original README, fish and themes
 profiles/

@@ -13,3 +13,16 @@ For the follow-up PR:
 7. Consider a curated Brewfile and an explicit, backup-first linking workflow once the profile is stable. Do not capture the machine's entire package inventory or introduce shared configuration until both profiles need the same file.
 
 Terminal, shell and prompt files can be copied from v1 and intentionally updated. Do not symlink v2 back into the immutable v1 snapshot.
+
+## Deployment decisions to test
+
+The [repository/tool research](../../../docs/dotfiles-structure-research.md) supports keeping copies and links as separate, application-specific choices:
+
+| Configuration | Initial policy for v2 |
+| --- | --- |
+| User-authored shell, prompt and bar source | Eligible for explicit links after testing conflict handling and reloads; select only intended files. |
+| Karabiner | Prefer a reviewed live copy initially. If later linking, [Karabiner requires a directory link, not a link to `karabiner.json`](https://karabiner-elements.pqrs.org/docs/manual/misc/configuration-file-path/). Keep automatic backups and other generated state out of Git. |
+| PAW | Keep a regular live file until settings writes, replacement and reload behavior are verified for the selected release. Review/diff live edits before capturing them; never let the application write into v1. |
+| Machine-local values | Define the exact local file, load order, precedence, behavior when absent and capture exclusion for each application that supports overrides. Add no generic sourcing hook by default. |
+
+A deployable profile needs tested versions, a curated dependency list, an owner and copy/link policy for each destination, a preview against a disposable target, conflict refusal and a verified rollback. Package installation, configuration deployment, macOS permissions and service activation must remain separately requested steps. `.gitignore` is not a deployment allowlist, and a dry run is not a backup.

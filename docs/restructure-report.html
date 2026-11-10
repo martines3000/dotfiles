@@ -80,6 +80,13 @@ scripts/validate.py
   </section>
 
   <section>
+    <h2>What other dotfile setups teach us</h2>
+    <p>Research across <a href="https://github.com/holman/dotfiles">holman</a>, <a href="https://github.com/mathiasbynens/dotfiles">mathiasbynens</a>, <a href="https://github.com/twpayne/dotfiles">twpayne</a> and <a href="https://github.com/folke/dot">folke</a> supports borrowing organization and deployment boundaries rather than personal preferences.</p>
+    <details><summary>Keep explicit profiles; choose a deployment tool after testing real needs</summary><p>Topic-oriented files help within an active profile. Machine selection and local overrides matter when maintaining several machines. Archives stay outside deployment roots. Reviewed copies suit this historical snapshot; Stow is a candidate for stable links, while chezmoi offers templates and ordinary destination files for repeated machine differences. Neither manager is introduced in this PR. The cited source comparisons are in <code>docs/dotfiles-structure-research.md</code>.</p></details>
+    <details><summary>Application-owned config needs a different policy from shell source</summary><p><a href="https://karabiner-elements.pqrs.org/docs/manual/misc/configuration-file-path/">Karabiner's official guidance</a> requires linking its directory rather than its JSON file, or change detection fails. Directory links can also expose the checkout to generated state. Keep reviewed live copies initially, and test PAW settings writes and reloads before choosing links. Future profile documentation now records copy/link ownership, local-override rules, conflict handling and rollback requirements.</p></details>
+  </section>
+
+  <section>
     <h2>What the Mac v1 snapshot includes</h2>
     <div class="chart" role="img" aria-label="60 snapshot files: 37 Sketchybar, 17 Fish and Zsh, and 6 other configuration files."><span class="c1" style="flex:37"></span><span class="c2" style="flex:17"></span><span class="c3" style="flex:6"></span></div>
     <div class="legend"><span><i class="dot c1" aria-hidden="true"></i>Sketchybar · 37</span><span><i class="dot c2" aria-hidden="true"></i>Fish + Zsh · 17</span><span><i class="dot c3" aria-hidden="true"></i>Other configuration · 6</span></div>
@@ -120,7 +127,7 @@ scripts/validate.py
     </ol>
     <p class="muted">Imported shell syntax, JSON/TOML and helper C source are checked without executing the desktop configuration. No fresh-machine restore, physical key test, OS permission restoration or homelab deployment has been performed.</p>
   </section>
-  <footer class="muted">Source: the existing repository, the Mac's pre-PAW backup, reviewed local configuration, and the linked official Omarchy documentation. Snapshot paths and checksums are recorded in <code>profiles/macos/v1-yabai/inventory.json</code>. No report data is fetched from the network.</footer>
+  <footer class="muted">Sources: the existing repository, the Mac's pre-PAW backup, reviewed local configuration, official tool documentation and the linked dotfile repositories. Research citations and inspected revisions are recorded in <code>docs/dotfiles-structure-research.md</code>; snapshot paths and checksums are in <code>profiles/macos/v1-yabai/inventory.json</code>. No report data is fetched from the network.</footer>
 </main>
 </body>
 </html>
