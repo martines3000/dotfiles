@@ -34,13 +34,13 @@ The tool handles configuration files. Starting/stopping window managers and chan
 
    This backs up replaced files. It leaves the PAW config and unused PAW bar scripts in place; the restored Sketchybar entry point uses v1's controls. Other files and personal data are untouched.
 
-4. Start Karabiner again. Re-enable the existing service labels on **this Mac**, then start yabai/skhd and Sketchybar:
+4. Start Karabiner again. Check Accessibility grants for yabai/skhd in System Settings; grant them again if required. The installed skhd currently refuses a CLI invocation from the agent session without Accessibility, so its live activation still needs verification. Re-enable and load the existing LaunchAgents on **this Mac**, then start Sketchybar:
 
    ```sh
    launchctl enable "gui/$(id -u)/com.asmvik.yabai"
    launchctl enable "gui/$(id -u)/com.koekeishiya.skhd"
-   yabai --start-service
-   skhd --start-service
+   launchctl bootstrap "gui/$(id -u)" "$HOME/Library/LaunchAgents/com.asmvik.yabai.plist"
+   launchctl bootstrap "gui/$(id -u)" "$HOME/Library/LaunchAgents/com.koekeishiya.skhd.plist"
    brew services start sketchybar
    ```
 
@@ -53,14 +53,16 @@ The tool handles configuration files. Starting/stopping window managers and chan
 Stop yabai/skhd and the bar, then preview/copy v2 and activate it using the [activation steps](RESTORE.md#4-activate-and-verify-the-desktop):
 
 ```sh
-yabai --stop-service
-skhd --stop-service
+launchctl bootout "gui/$(id -u)/com.asmvik.yabai"
+launchctl bootout "gui/$(id -u)/com.koekeishiya.skhd"
+launchctl disable "gui/$(id -u)/com.asmvik.yabai"
+launchctl disable "gui/$(id -u)/com.koekeishiya.skhd"
 brew services stop sketchybar
 python3 scripts/restore_macos.py --profile v2-paw
 python3 scripts/restore_macos.py --profile v2-paw --apply
 ```
 
-Quit Karabiner before copying its configuration and restart it afterward. Disable yabai/skhd's login entries if they were re-enabled for v1. The copy tool does not make that change. PAW's saved v2 configuration requests start-at-login when the app is later launched.
+If a LaunchAgent is already unloaded, skip its bootout step. Quit Karabiner before copying its configuration and restart it afterward. The commands disable the two old login entries; the copy tool itself does not make that change. PAW's saved v2 configuration requests start-at-login when the app is later launched.
 
 ## Bring back the experiment you had before copying v1
 
