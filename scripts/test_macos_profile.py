@@ -1,0 +1,49 @@
+import json
+import os
+import pathlib
+import subprocess
+import sys
+import tempfile
+import unittest
+
+
+BAR = pathlib.Path(__file__).resolve().parents[1] / "profiles/macos/v2-paw/home/.config/sketchybar"
+
+
+class NetworkWidgetTests(unittest.TestCase):
+    def labels(self, network):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = pathlib.Path(temporary)
+            log = root / "calls.jsonl"
+            mock = f"#!{sys.executable}\n" + '''import json, os, pathlib, sys
+name = pathlib.Path(sys.argv[0]).name
+if name == "scutil":
+    print(os.environ["TEST_NETWORK"])
+elif name == "networksetup":
+    print("Hardware Port: Wi-Fi\\nDevice: en7")
+else:
+    with open(os.environ["TEST_LOG"], "a") as stream:
+        stream.write(json.dumps(sys.argv[1:]) + "\\n")
+'''
+            for name in ["scutil", "networksetup", "sketchybar"]:
+                path = root / name
+                path.write_text(mock)
+                path.chmod(0o755)
+            env = dict(os.environ, PATH=str(root) + ":" + os.environ["PATH"], CONFIG_DIR=str(BAR), NAME="wifi", SENDER="wifi_change", TEST_NETWORK=network, TEST_LOG=str(log))
+            subprocess.run(["bash", str(BAR / "plugins/wifi.sh")], env=env, check=True, capture_output=True, text=True)
+            return [arg for line in log.read_text().splitlines() for arg in json.loads(line) if arg.startswith("label=")]
+
+    def test_connected_wifi_uses_discovered_interface(self):
+        labels = self.labels("en7 : flags IPv4\n address : 203.0.113.20")
+        self.assertIn("label=Wi-Fi 203.0.113.20", labels)
+
+    def test_other_interface_does_not_claim_wifi(self):
+        labels = self.labels("en4 : flags IPv4\n address : 203.0.113.20")
+        self.assertFalse(any("Wi-Fi" in label for label in labels))
+
+    def test_tunnel_retains_existing_indicator(self):
+        self.assertIn("label=VPN", self.labels("utun4 : flags IPv4"))
+
+
+if __name__ == "__main__":
+    unittest.main()
