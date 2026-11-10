@@ -46,6 +46,11 @@ class BarTests(unittest.TestCase):
         self.assertIn("display=2", args)
         self.assertIn("display=active", args)
         self.assertIn("label=float", args)
+        empty = max(i for i, arg in enumerate(args) if arg == "paw.space.2")
+        empty_args = args[empty + 1:]
+        empty_args = empty_args[:empty_args.index("--set")]
+        self.assertIn("label.drawing=off", empty_args)
+        self.assertIn("icon.padding_right=10", empty_args)
         self.env["SENDER"] = "paw_focus"
         self.assertEqual(self.run_plugin("paw.sh").returncode, 0)
         args = json.loads(self.log.read_text().splitlines()[-1])

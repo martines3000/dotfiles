@@ -2,10 +2,18 @@
 
 V2 was activated on this Mac on **2026-11-10**, using PAW `0.1.0-beta.1+5249781`. The config matches the saved v2 snapshot. PAW, its Accessibility grant and the bar were checked; yabai/skhd/borders were inactive. This records a starting point, not proof that every keyboard, layout or display path works.
 
+## Current local PAW test build
+
+On the same day, `0.1.0-beta.4+57a5ace` was built and installed to test [upstream draft PR #29](https://github.com/pseudobun/paw/pull/29). It retries a focused placeholder's size while parked, allowing recovery from a stale learned minimum without a global `retile`. The source revision is `57a5ace0e6708472ddec3cf94354b19e782993e2`. The inventory's runtime metadata continues to describe the original captured baseline, not this later binary experiment.
+
+All 78 Swift tests passed. The opt-in native AX fixture failed on the originally installed build, then passed with the patch and with animations both off and on at 180 ms. It checks a real minimum, recovery after that minimum shrinks, and workspace switching during a pending check. Arc and Brave appeared in roomier tiles; their roughly 430-point tiles still required genuine placeholders. Opening Arc's command bar alone was not a reliable trigger for the original stale constraint.
+
+The original app, config and layout state were saved in a private recovery directory outside Git. Local test bundles omit the Sparkle update key to keep the experimental binary in place. Changing an ad hoc app's signature can require removing and re-adding its existing Accessibility entry; toggling the old entry alone retained the stale signature during this test. Recheck `paw status` after every binary replacement.
+
 ## A small experiment loop
 
 1. Start from the saved baseline or keep a private copy of the file you are about to edit. The [recovery guide](SWITCHING.md) explains returning to v1 or undoing a profile copy.
-2. Change one behavior at a time. Keep the familiar Option+I/J/K/L shortcuts while testing other choices. Useful first experiments are focus-follow-mouse behavior, stack cycling, resize steps and which apps should float.
+2. Change one behavior at a time. Keep the preferred focus-follows-mouse behavior and familiar Option+I/J/K/L shortcuts. Useful experiments are stack cycling, resize steps and which apps should float.
 3. Run `paw config check`, then `paw reload` and `paw status`. A reload error keeps the last good config; record the error locally rather than guessing what was applied. If PAW exits, capture the failure and restart it with `open -a paw`.
 4. Test the exact action that motivated the change. Write down expected and actual results, the starting layout, relevant app versions and how often it reproduces. Stop once a test answers the question; do not rearrange unrelated workspaces for coverage.
 5. Keep a useful change in the live config until it feels right. Before committing it, review the selected diff, scan for private data and update its inventory hash/provenance. A good live experiment is not automatically a new saved baseline.

@@ -11,7 +11,7 @@ BAR = pathlib.Path(__file__).resolve().parents[1] / "profiles/macos/v2-paw/home/
 
 
 class NetworkWidgetTests(unittest.TestCase):
-    def arguments(self, network, vpn=""):
+    def arguments(self, network, vpn="", name="wifi", sender="wifi_change"):
         with tempfile.TemporaryDirectory() as temporary:
             root = pathlib.Path(temporary)
             log = root / "calls.jsonl"
@@ -25,12 +25,12 @@ else:
     with open(os.environ["TEST_LOG"], "a") as stream:
         stream.write(json.dumps(sys.argv[1:]) + "\\n")
 '''
-            for name in ["scutil", "networksetup", "sketchybar"]:
-                path = root / name
+            for program in ["scutil", "networksetup", "sketchybar"]:
+                path = root / program
                 path.write_text(mock)
                 path.chmod(0o755)
             network = "IPv4 network interface information\n" + network + "\nIPv6 network interface information\n"
-            env = dict(os.environ, PATH=str(root) + ":" + os.environ["PATH"], CONFIG_DIR=str(BAR), NAME="wifi", SENDER="wifi_change", TEST_NETWORK=network, TEST_VPN=vpn, TEST_LOG=str(log))
+            env = dict(os.environ, PATH=str(root) + ":" + os.environ["PATH"], CONFIG_DIR=str(BAR), NAME=name, SENDER=sender, TEST_NETWORK=network, TEST_VPN=vpn, TEST_LOG=str(log))
             subprocess.run(["bash", str(BAR / "plugins/wifi.sh")], env=env, check=True, capture_output=True, text=True)
             return [arg for line in log.read_text().splitlines() for arg in json.loads(line)]
 
@@ -64,6 +64,14 @@ else:
     def test_disconnected_vpn_and_idle_tunnels_remain_hidden(self):
         args = self.arguments("en7 : flags IPv4\n address : 203.0.113.20\nIPv6 network interface information\nNetwork interfaces: en7 utun4", '* (Disconnected) TEST VPN')
         self.assertEqual(args[args.index("vpn") + 1], "drawing=off")
+
+    def test_hover_lists_only_connected_names_as_data(self):
+        names = '* (Connected) ID "Home VPN"\n* (Disconnected) ID "Inactive"\n* (Connected) ID "Mesh VPN"'
+        args = self.arguments("en7 : flags IPv4\n address : 203.0.113.20", names)
+        self.assertIn("label=Home VPN · Mesh VPN", args)
+        self.assertFalse(any("Inactive" in arg for arg in args))
+        popup = self.arguments("", name="vpn", sender="mouse.entered")
+        self.assertEqual(popup, ["--set", "vpn", "popup.drawing=on"])
 
 
 if __name__ == "__main__":

@@ -3,10 +3,11 @@ sketchybar --add event paw_changed --add event paw_focus
 # shortcut: numbered workspaces 1–12; add named/dynamic items before using a side workspace.
 for sid in {1..12}; do
   sketchybar --add item paw.space.$sid left --set paw.space.$sid \
-    drawing=off icon="$sid" icon.padding_left=9 icon.padding_right=3 \
-    padding_left=1 padding_right=1 label.padding_right=9 \
+    drawing=off icon="$sid" icon.padding_left=10 icon.padding_right=10 \
+    padding_left=1 padding_right=1 label.padding_left=6 label.padding_right=10 \
     icon.highlight_color="$YELLOW" label.color="$GREY" label.highlight_color="$WHITE" \
-    label.font="sketchybar-app-font:Regular:13.0" \
+    label.font="sketchybar-app-font:Regular:13.0" label.y_offset=-1 \
+    background.height=22 background.corner_radius=7 background.padding_left=0 background.padding_right=0 \
     background.color="$TRANSPARENT" script="$PLUGIN_DIR/paw.sh" \
     --subscribe paw.space.$sid mouse.clicked
 done

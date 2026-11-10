@@ -239,7 +239,7 @@
       "path": "home/.config/sketchybar/items/paw.sh",
       "source": "~/.config/sketchybar/items/paw.sh",
       "source_sha256": "5c3f923d12d387ca36aaff507c436d00e4689c07eec178d0e1e986187815c9c9",
-      "sha256": "f852ce5154586c235551dcdedf422df3073eee1989412cdbdacd546742a92f5b",
+      "sha256": "f1d27eb508e7dd417b3613bef32984c7b99fd73725ba8f05e7d5750af12a67d0",
       "modified_for_v2": true
     },
     {
@@ -267,7 +267,7 @@
       "path": "home/.config/sketchybar/items/wifi.sh",
       "source": "~/.config/sketchybar/items/wifi.sh",
       "source_sha256": "54218848bf3997d2aa54477d3570f0eca52b9539c05493b47ff11133325808e2",
-      "sha256": "3622276e7b398e0fd628b4c487abc84ea7f1dfccbb6d62c4be090bbfa6e6be54",
+      "sha256": "8c4a8a9828048fdf5a4573a1b13ac3641cebf7fe3156498b532b36b67da7109e",
       "modified_for_v2": true
     },
     {
@@ -330,7 +330,7 @@
       "path": "home/.config/sketchybar/plugins/paw.sh",
       "source": "~/.config/sketchybar/plugins/paw.sh",
       "source_sha256": "5d4f54b8e512a4b2af1e0e681084ac37008ea8cc49ef5032c5e8772cbe916dab",
-      "sha256": "aea8586de53f5ff787fbdb5ff18d82a37e9b36deca000bba5fa2e6f43292a342",
+      "sha256": "e7239d5c8cf70c6ae1615c4efab43e26fa3082b61581b4ffb7c4c47c18e1badf",
       "modified_for_v2": true
     },
     {
@@ -365,7 +365,7 @@
       "path": "home/.config/sketchybar/plugins/wifi.sh",
       "source": "~/.config/sketchybar/plugins/wifi.sh",
       "source_sha256": "456b137a8aafe901ca521a932588d82dcf562a827014cda8a5366f7de76d46f0",
-      "sha256": "0e95cda72fa4003e8682bfc2a3807d9f414ceae966973107cb0790c6ec79fd6d",
+      "sha256": "fc89d5affdaaa430224482d753f1a584875433fbdef1e584d28ed3927a46a8e0",
       "modified_for_v2": true
     },
     {
@@ -379,7 +379,7 @@
       "path": "home/.config/sketchybar/sketchybarrc",
       "source": "~/.config/sketchybar/sketchybarrc",
       "source_sha256": "7da9e23d586d472004983caf508d3c7fdf20d8b808e03e09f89ad9072f6ea9c2",
-      "sha256": "25ab1fec5136f57637e9f9fb327a435abaa4fb8600922cac3408faa306073a6d",
+      "sha256": "839c898d63f6ae3e1c6bd148f75fbd002e9d19d12ed83ac121a8a4d23dcd1ec2",
       "modified_for_v2": true
     },
     {

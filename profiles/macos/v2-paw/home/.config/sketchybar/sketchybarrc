@@ -1,5 +1,6 @@
 #!/bin/bash
 export PATH="/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+sketchybar --hotload off
 source "$CONFIG_DIR/colors.sh"
 source "$CONFIG_DIR/icons.sh"
 ITEM_DIR="$CONFIG_DIR/items"
@@ -62,6 +63,7 @@ source "$ITEM_DIR/spotify.sh"
 sketchybar --set spotify.anchor icon.font="$FONT:Regular:17.0" y_offset=0 \
   background.color="$BACKGROUND_1" background.drawing=on
 
+# Right items are added from the right edge inward: date/time stays at the far right.
 source "$ITEM_DIR/calendar.sh"
 sketchybar --set calendar icon.font="$FONT:Medium:11.0" label.width=dynamic \
   padding_left=8 padding_right=8 click_script="open -a Calendar"
@@ -74,5 +76,6 @@ source "$ITEM_DIR/volume.sh"
 source "$ITEM_DIR/cpu.sh"
 island system.island right wifi vpn battery volume volume_icon cpu.percent
 
-sketchybar --hotload on
+# File-watch reloads can overlap while sourcing items and corrupt their order/defaults.
+sketchybar --hotload off
 sketchybar --update

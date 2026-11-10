@@ -1,6 +1,14 @@
 #!/bin/bash
 source "$CONFIG_DIR/colors.sh"
 source "$CONFIG_DIR/icons.sh"
+if [ "$NAME" = vpn ]; then
+  case "$SENDER" in
+    mouse.entered) sketchybar --set vpn popup.drawing=on ;;
+    mouse.exited|mouse.exited.global) sketchybar --set vpn popup.drawing=off ;;
+    mouse.clicked) sketchybar --set vpn popup.drawing=toggle ;;
+  esac
+  exit
+fi
 if [ "$SENDER" = mouse.clicked ]; then
   width=$(sketchybar --query "$NAME" | jq -r '.label.width')
   target=0
@@ -23,10 +31,14 @@ if [ -n "$ip" ]; then
   fi
 fi
 vpn_connections=$(scutil --nc list 2>/dev/null)
+vpn_names=$(printf '%s\n' "$vpn_connections" | awk -F '"' '
+  /[(]Connected[)]/ && NF >= 3 && !seen[$2]++ { if (n++) printf " · "; printf "%s", $2 }')
 vpn=off
 # Connected services cover VPNs that do not publish an IPv4 utun in --nwi.
 if printf '%s' "$vpn_connections" | grep -Fq '(Connected)' || printf '%s' "$v4" | grep -Eq 'utun[0-9]+[[:space:]]*:'; then
   vpn=on
 fi
+[ -n "$vpn_names" ] || vpn_names="Connected VPN / active tunnel"
 sketchybar --set "$NAME" icon="$icon" label="$label" icon.color="$color" background.drawing=off \
-  --set vpn drawing="$vpn" icon.color="$BLUE"
+  --set vpn drawing="$vpn" icon.color="$BLUE" --set vpn.connections label="$vpn_names"
+if [ "$vpn" = off ]; then sketchybar --set vpn popup.drawing=off; fi
