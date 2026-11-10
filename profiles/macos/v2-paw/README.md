@@ -14,6 +14,8 @@ For the follow-up PR:
 
 Terminal, shell and prompt files can be copied from v1 and intentionally updated. Do not symlink v2 back into the immutable v1 snapshot.
 
+If several Macs eventually need different values within this PAW generation, consider small host overrides inside this profile, as discussed in the `pseudobun/dotfiles` comparison. No host-overlay directories are needed for the current single-Mac plan. Linux/Omarchy remains a separate profile with its own software and setup.
+
 ## Deployment decisions to test
 
 The [repository/tool research](../../../docs/dotfiles-structure-research.md) supports keeping copies and links as separate, application-specific choices:

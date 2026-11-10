@@ -11,7 +11,7 @@ Versioned desktop configurations, with old setups kept for reference.
 
 See the [restructure report](docs/restructure-report.html) for the inventory, findings and next steps. Download/open the HTML file to view it; GitHub's file view shows its source.
 
-The [structure research](docs/dotfiles-structure-research.md) compares four real repositories and reviewed copies, Stow and chezmoi. The recommendation is to keep explicit profiles now, separate configuration deployment from package/service setup, and select deployment tooling only after the active profiles and application write behavior have been tested.
+The [structure research](docs/dotfiles-structure-research.md) compares five real repositories, including `pseudobun/dotfiles`, and reviewed copies, Stow and chezmoi. The recommendation is to keep explicit profiles now, separate configuration deployment from package/service setup, and select deployment tooling only after the active profiles and application write behavior have been tested.
 
 ```text
 archive/legacy-2023/             # original README, fish and themes
@@ -31,6 +31,8 @@ scripts/validate.py              # read-only integrity and file-boundary checks
 These are reviewable configuration snapshots, not an automatic installer. Nothing in this PR installs, links, starts or stops applications on a machine. The live Mac configuration is separate from this checkout.
 
 Choose one profile and read its README before copying anything. Do not link the whole `profiles/` tree, combine v1 and v2 window managers, or treat the archive as a current setup. Keep each profile self-contained until there is a proven reason to share a file between systems.
+
+macOS and Linux/Omarchy are independent setups with different software, package management, startup behavior and validation. Host overrides, if needed, belong within the relevant OS profile. A Mac-only repository can inform organization without defining the Linux stack. Share individual files only when both maintained profiles actually use the same configuration; no cross-platform installer or matching application set is assumed.
 
 ## Before publishing changes
 

@@ -1,6 +1,6 @@
 # Dotfile structure research
 
-Checked **2026-11-10** against [PR #1](https://github.com/martines3000/dotfiles/pull/1), head `9fceb044c9555d4088126ddfa611a7e6effca10b`. Repository examples below link to inspected revisions. Commit dates establish observed activity, not compatibility or continuing maintenance. The supplied “friend” URL identifies this baseline; the intended external repository remains unknown.
+Checked **2026-11-10** against [PR #1](https://github.com/martines3000/dotfiles/pull/1), head `05c6c0af0fc4de4226eb5813d79357adb219c87b`. Repository examples below link to inspected revisions. Commit dates establish observed activity, not compatibility or continuing maintenance. The newly supplied friend repository is [pseudobun/dotfiles](https://github.com/pseudobun/dotfiles), inspected below.
 
 ## Assessment of this PR
 
@@ -8,7 +8,9 @@ Checked **2026-11-10** against [PR #1](https://github.com/martines3000/dotfiles/
 
 **Recommendation:** retain explicit, self-contained profiles and immutable history. A snapshot records selected bytes and provenance; deployment additionally requires destination ownership, dependencies, collision handling, application lifecycle and rollback. Two empty future profiles provide no evidence that shared layers or a manager would simplify real differences. Reconsider when two maintained profiles repeatedly need the same changes, rather than deduplicating the archive.
 
-## Four contrasting repositories: facts and useful ideas
+macOS and Linux/Omarchy are independent software stacks, not host variants of one Mac setup. Host overrides, if later needed, stay within the relevant OS profile; sharing a configuration file requires a demonstrated common use.
+
+## Five contrasting repositories: facts and useful ideas
 
 - **holman/dotfiles — topic-centric classic, with observed 2026 activity.** Its [README](https://github.com/holman/dotfiles/blob/9a90082b61fa5659789b9d41544c19098825a3ca/README.md) groups shell fragments and installers by topic. [Bootstrap](https://github.com/holman/dotfiles/blob/9a90082b61fa5659789b9d41544c19098825a3ca/script/bootstrap) discovers `*.symlink`, offers collision choices, then invokes further Mac setup; [install](https://github.com/holman/dotfiles/blob/9a90082b61fa5659789b9d41544c19098825a3ca/script/install) runs Brew Bundle and discovered installers. [Latest inspected commit: June 25](https://github.com/holman/dotfiles/commit/9a90082b61fa5659789b9d41544c19098825a3ca). **Takeaway:** component-oriented documentation and explicit conflict handling are useful inside a future profile. Avoid automatic discovery/execution across this repository: it contains mutually exclusive desktops and archives.
 
@@ -17,6 +19,16 @@ Checked **2026-11-10** against [PR #1](https://github.com/martines3000/dotfiles/
 - **twpayne/dotfiles — actual multi-machine chezmoi.** [.chezmoiroot](https://github.com/twpayne/dotfiles/blob/13f4e5f23cb8333a263efec7cab3a324d5a37007/.chezmoiroot) restricts deployment source to `home`; the [configuration template](https://github.com/twpayne/dotfiles/blob/13f4e5f23cb8333a263efec7cab3a324d5a37007/home/.chezmoi.toml.tmpl) derives shell, work/personal and headless flags, while [ignore logic](https://github.com/twpayne/dotfiles/blob/13f4e5f23cb8333a263efec7cab3a324d5a37007/home/.chezmoiignore.tmpl) filters by OS and features. [Latest inspected commit: November 5](https://github.com/twpayne/dotfiles/commit/13f4e5f23cb8333a263efec7cab3a324d5a37007). **Takeaway:** a deployment root separate from documentation/history and explicit feature selection scale to real machine differences. Its [installer](https://github.com/twpayne/dotfiles/blob/13f4e5f23cb8333a263efec7cab3a324d5a37007/install.sh) immediately applies configuration; that coupling is unsuitable for this archival PR. Do not import its personal/private integrations.
 
 - **folke/dot — current modular workstation automation.** [Latest inspected commit: April 17, 2026](https://github.com/folke/dot/commit/10526a848771bab9e9fbb98b5995c997f7ef92b6). Its [playbook](https://github.com/folke/dot/blob/10526a848771bab9e9fbb98b5995c997f7ef92b6/ansible/playbook.yml) separates packages, dotfiles, user, apps and system roles. The [dot role](https://github.com/folke/dot/blob/10526a848771bab9e9fbb98b5995c997f7ef92b6/ansible/roles/dot/tasks/main.yml) links individual top-level config directories; [.gitignore](https://github.com/folke/dot/blob/10526a848771bab9e9fbb98b5995c997f7ef92b6/.gitignore) excludes generated theme/session artifacts. Its [inventory](https://github.com/folke/dot/blob/10526a848771bab9e9fbb98b5995c997f7ef92b6/ansible/hosts) is localhost, so this is modularity evidence, not a verified multi-host implementation. **Takeaway:** separate configuration deployment from system provisioning; adopt neither its broad linking scope nor host-specific package choices.
+
+### pseudobun/dotfiles — common components, two Mac overlays
+
+Inspected [revision `c102f6dd2aa138d4b2c5b8d2fef65238cc31d890`](https://github.com/pseudobun/dotfiles/commit/c102f6dd2aa138d4b2c5b8d2fef65238cc31d890) through current GitHub API/files, not cached listings. The [README](https://github.com/pseudobun/dotfiles/blob/c102f6dd2aa138d4b2c5b8d2fef65238cc31d890/README.md#L16-L29) identifies a laptop and Mac mini sharing component sources, with `hosts/<host>/Brewfile` manifests and a `hop/config.json5` override. These are machine overlays within one setup, unlike this repository's generation profiles.
+
+[Bootstrap](https://github.com/pseudobun/dotfiles/blob/c102f6dd2aa138d4b2c5b8d2fef65238cc31d890/bootstrap.sh#L1270-L1324) accepts `--host`, remembers the choice, offers a prompted default, supports `--only`/`--skip` steps and rejects non-macOS. [Link helpers](https://github.com/pseudobun/dotfiles/blob/c102f6dd2aa138d4b2c5b8d2fef65238cc31d890/bootstrap.sh#L548-L590) give host files precedence; ordinary non-symlink conflicts receive timestamped backups, except empty/stub files; existing links can be replaced. This is not universal overwrite protection or a deployment dry run.
+
+The [justfile](https://github.com/pseudobun/dotfiles/blob/c102f6dd2aa138d4b2c5b8d2fef65238cc31d890/justfile) offers whole-machine package dump, dependency checks and cleanup preview without `--force`, plus encrypted private workflows. [Ignore rules](https://github.com/pseudobun/dotfiles/blob/c102f6dd2aa138d4b2c5b8d2fef65238cc31d890/.gitignore) exclude plaintext environment/local files and generated artifacts; they are not deployment boundaries. These observations establish source behavior, not compatibility on this user's Mac/Linux; no bootstrap was executed.
+
+**Recommendation:** adapt common sources plus minimal host deltas inside future PAW only if multiple Macs need them. Choose hosts explicitly, review check/diff before activation, default to backups and forbid broad migration deletion. Keep Omarchy distinct; its host version remains unknown. Exclude whole-machine dumps, secrets/key migration, sudo/debloat/defaults changes, services and destructive legacy-WM removal from this archival PR.
 
 ## Deployment approaches and boundaries
 
