@@ -20,11 +20,13 @@ The tool handles configuration files. Starting/stopping window managers and chan
 2. Disable PAW's start-at-login setting so it does not return on the next login. Stop the bar, quit PAW and temporarily quit Karabiner before replacing files:
 
    ```sh
+   launchctl bootout "gui/$(id -u)/local.dotfiles.paw-sketchybar"
+   launchctl bootout "gui/$(id -u)/local.dotfiles.brew-refresh"
    brew services stop sketchybar
    paw quit
    ```
 
-   If PAW already stopped or crashed, skip its quit command. Restarting PAW and quitting normally can recover windows it had hidden; do not start yabai while PAW is still managing them.
+   If an authored LaunchAgent is not loaded, skip that bootout command. The plists can remain on disk when copying v1: also disable their labels with `launchctl disable gui/$(id -u)/local.dotfiles.paw-sketchybar` and `launchctl disable gui/$(id -u)/local.dotfiles.brew-refresh` so they do not return at login. If PAW already stopped or crashed, skip its quit command. Restarting PAW and quitting normally can recover windows it had hidden; do not start yabai while PAW is still managing them.
 
 3. Copy the v1 files. Keep the printed recovery directory if you may want your experimental configuration back:
 
@@ -76,3 +78,19 @@ python3 scripts/restore_macos.py --rollback "/absolute/path/to/recovery-director
 Rollback is independent of `--profile`, so those options cannot be combined. Later edits cause refusal before rollback writes; review those files manually instead of overwriting them. PAW-only files not touched by the v1 copy remain as they were. Reactivate PAW and its startup settings explicitly afterward.
 
 Only configuration copy/recovery has been tested in disposable directories. The live desktop has not been switched to v1 and back as part of this change. Clean-install recovery is a later task; its intended scope is the important apps and selected configuration, not an exact machine image.
+
+## Undo the rounded-bar iteration
+
+Boot out both `local.dotfiles.*` LaunchAgents above before rolling back the copy that installed the rounded bar. Stop Sketchybar and PAW, undo any subsequent copies in reverse order, use the initial rounded-bar copy's printed recovery receipt, and restart PAW and the bar afterward. This removes the newly authored agent plists while restoring the earlier hook-based PAW config. Do not boot the agents back in when using that earlier config.
+
+Desktop visibility is separate from file-copy rollback. To show the icons and widgets again:
+
+```sh
+defaults write com.apple.finder CreateDesktop -bool true
+defaults write com.apple.WindowManager StandardHideWidgets -int 0
+defaults write com.apple.WindowManager StageManagerHideWidgets -int 0
+killall Finder
+killall Dock
+```
+
+The exact pre-change values for this Mac were saved outside Git in the desktop-settings recovery directory. Desktop files and widget arrangements were not removed.

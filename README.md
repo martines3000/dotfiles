@@ -5,7 +5,7 @@ Versioned desktop configurations, with old setups kept for reference.
 | Profile | Status | Contents |
 | --- | --- | --- |
 | [macOS v1 — yabai](profiles/macos/v1-yabai/) | Historical snapshot | Pre-PAW yabai, skhd and Sketchybar; Karabiner, terminal and shell configuration |
-| [macOS v2 — PAW](profiles/macos/v2-paw/) | Active Mac baseline | 55 files, curated dependencies, copy/rollback and local bug-report drafts; clean macOS test pending |
+| [macOS v2 — PAW](profiles/macos/v2-paw/) | Active Mac baseline | 58 files, rounded Sketchybar, curated dependencies, copy/rollback and local bug-report drafts; clean macOS test pending |
 | [Linux — Omarchy homelab](profiles/linux/omarchy-homelab/) | Planned | A separate desktop profile; host inventory still needed |
 | [Legacy setups](archive/legacy-2023/) | Archived | All 221 previously tracked files, preserved without content changes |
 

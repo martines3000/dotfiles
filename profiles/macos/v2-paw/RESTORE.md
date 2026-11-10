@@ -67,11 +67,24 @@ If either destination already exists, stop and review that installation first. T
 2. Open Karabiner-Elements and complete its keyboard/input permissions. The saved mapping includes keyboard-model-specific rules; verify them on the keyboard you actually use.
 3. Run `open -a paw` and grant Accessibility in System Settings. Screen Recording is optional for overview thumbnails.
 4. Run `paw config check` and `paw status`; expect `trusted: yes` and `bindings: ok`. Test Option+I/J/K/L, workspace switching, Caps Lock shortcuts and resize mode.
-5. Run `brew services start sketchybar`. Check workspace highlighting, fonts, helper/CPU, network state, audio and the optional account-dependent widgets. Sign into GitHub (`gh auth login`) and Spotify if desired.
+5. Run `brew services start sketchybar`, then load the two authored agents below. Check workspace highlighting, fonts, helper/CPU, network state, audio and the optional account-dependent widgets. Sign into GitHub (`gh auth login`) and Spotify if desired.
 6. Open Alacritty. It launches Fish itself; changing the account's login shell is optional and is not automated. Choose/install language toolchains separately.
 7. Test PAW startup after login/reboot and display reconnects. Use one native Space per display as recommended by the PAW version you install. Tune macOS tiling/Spaces settings manually if they conflict.
 
 Do not call the restore verified until these checks pass on the fresh machine.
+
+Load the event bridge and cached Homebrew refresh after their files have been copied:
+
+```sh
+launchctl enable "gui/$(id -u)/local.dotfiles.paw-sketchybar"
+launchctl enable "gui/$(id -u)/local.dotfiles.brew-refresh"
+launchctl bootstrap "gui/$(id -u)" "$HOME/Library/LaunchAgents/local.dotfiles.paw-sketchybar.plist"
+launchctl bootstrap "gui/$(id -u)" "$HOME/Library/LaunchAgents/local.dotfiles.brew-refresh.plist"
+```
+
+Skip bootstrap for a job already loaded. After changing a loaded plist, boot out its label and bootstrap it again. The PAW bridge reconnects across PAW restarts and remains independent of bar reloads; the brew job runs at login and hourly without updating Homebrew metadata or installing anything.
+
+For the uncluttered desktop, run `bash profiles/macos/v2-paw/desktop.sh` separately. This hides desktop icons and desktop/Stage Manager widgets without deleting their contents. Review [undo instructions](SWITCHING.md#undo-the-rounded-bar-iteration) before applying it on another machine.
 
 ## Undo a copy
 

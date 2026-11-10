@@ -29,6 +29,7 @@ else:
                 path = root / name
                 path.write_text(mock)
                 path.chmod(0o755)
+            network = "IPv4 network interface information\n" + network + "\nIPv6 network interface information\n"
             env = dict(os.environ, PATH=str(root) + ":" + os.environ["PATH"], CONFIG_DIR=str(BAR), NAME="wifi", SENDER="wifi_change", TEST_NETWORK=network, TEST_LOG=str(log))
             subprocess.run(["bash", str(BAR / "plugins/wifi.sh")], env=env, check=True, capture_output=True, text=True)
             return [arg for line in log.read_text().splitlines() for arg in json.loads(line) if arg.startswith("label=")]
@@ -43,6 +44,9 @@ else:
 
     def test_tunnel_retains_existing_indicator(self):
         self.assertIn("label=VPN", self.labels("utun4 : flags IPv4"))
+
+    def test_inactive_or_ipv6_only_tunnel_does_not_claim_vpn(self):
+        self.assertIn("label=offline", self.labels("IPv6 network interface information\nutun4 : flags IPv6"))
 
 
 if __name__ == "__main__":
