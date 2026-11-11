@@ -15,13 +15,13 @@ PROFILE = ROOT / "profiles/macos/v1-yabai"
 def private_path(path):
     parts = pathlib.PurePosixPath(path).parts
     name = parts[-1].lower()
-    blocked_dirs = {".ssh", "ssh", ".aws", ".kube", ".gnupg", "automatic_backups", "backups", ".cache", ".local"}
+    blocked_dirs = {".ssh", "ssh", ".aws", ".kube", ".gnupg", "automatic_backups", "backups", "diagnostics", ".cache", ".local"}
     blocked_names = {"ssh_config", "known_hosts", "authorized_keys", "fish_variables", ".bash_history", ".zsh_history", ".npmrc", ".netrc", ".pypirc", ".git-credentials"}
     return (
         bool(blocked_dirs.intersection(parts))
         or name in blocked_names
         or name.startswith((".env", "credentials", "id_rsa", "id_ed25519"))
-        or name.endswith((".pem", ".key", ".p12", ".pfx", ".keystore", ".log", ".bak", ".local", "_history"))
+        or name.endswith((".pem", ".key", ".p12", ".pfx", ".keystore", ".log", ".ips", ".crash", ".bak", ".local", "_history"))
         or ".config/gh/" in path
         or ".config/gcloud/" in path
         or path.endswith("sketchybar/helper/helper")
