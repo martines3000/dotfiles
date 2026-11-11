@@ -44,6 +44,6 @@ macOS and Linux/Omarchy remain independent software stacks. If multiple Macs eve
 
 ## Known limits
 
-PAW is a source-built beta; the recorded build was `0.1.0-beta.1+5249781`, revision `5249781ff7d3b40eab60383a2c943762389cf0f8`, signed ad hoc. Source access and signing must be handled separately on a new Mac. A Brewfile installs available versions and is not a historical package lockfile.
+PAW is a source-built beta; the inventory records the original `0.1.0-beta.1+5249781` capture, revision `5249781ff7d3b40eab60383a2c943762389cf0f8`, signed ad hoc. See the [dated validation record](DEBUGGING.md) for the later tested beta.6 build and merged upstream fixes. Source access and signing must be handled separately on a new Mac. A Brewfile installs available versions and is not a historical package lockfile.
 
 Permissions, keyboard models/layout, multiple displays, login startup and all bar widgets still need testing on a clean machine. GitHub and Spotify widgets require their apps/accounts; they are not restored sessions. The CPU helper is built locally on first bar startup using the Command Line Tools. Local overrides should be added per application only after documenting location, precedence, missing-file behavior and capture exclusion.

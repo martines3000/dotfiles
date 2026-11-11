@@ -2,11 +2,19 @@
 
 V2 was activated on this Mac on **2026-11-10**, using PAW `0.1.0-beta.1+5249781`. The config matches the saved v2 snapshot. PAW, its Accessibility grant and the bar were checked; yabai/skhd/borders were inactive. This records a starting point, not proof that every keyboard, layout or display path works.
 
-## Current local PAW test build
+## Last validated PAW build — 2026-11-10
 
-On the same day, `0.1.0-beta.4+57a5ace` was built and installed to test [upstream draft PR #29](https://github.com/pseudobun/paw/pull/29). It retries a focused placeholder's size while parked, allowing recovery from a stale learned minimum without a global `retile`. The source revision is `57a5ace0e6708472ddec3cf94354b19e782993e2`. The inventory's runtime metadata continues to describe the original captured baseline, not this later binary experiment.
+PAW `0.1.0-beta.6+13037f1`, source revision [`13037f1cf79b07a6ae54cc987601c7022b3ed3d2`](https://github.com/pseudobun/paw/commit/13037f1cf79b07a6ae54cc987601c7022b3ed3d2), was built, installed and granted Accessibility on this Mac. It includes three fixes that are now merged upstream:
 
-All 78 Swift tests passed. The opt-in native AX fixture failed on the originally installed build, then passed with the patch and with animations both off and on at 180 ms. It checks a real minimum, recovery after that minimum shrinks, and workspace switching during a pending check. Arc and Brave appeared in roomier tiles; their roughly 430-point tiles still required genuine placeholders. Opening Arc's command bar alone was not a reliable trigger for the original stale constraint.
+- [#29 — stale minimum recovery](https://github.com/pseudobun/paw/pull/29): retry a parked window's tile size and recover if it now fits, preserving genuine constraints and newer focus requests.
+- [#30 — placeholder hover focus](https://github.com/pseudobun/paw/pull/30): hovering selects a placeholder when focus-follows-mouse is enabled, while its constrained window stays parked.
+- [#31 — focus after full-screen/float toggles](https://github.com/pseudobun/paw/pull/31): bring the restored window forward and give it native focus.
+
+All **86 Swift tests** and [CI for the tested head](https://github.com/pseudobun/paw/actions/runs/42904625034) passed. The native minimum-size regression passed with animations disabled and enabled at 180 ms: a genuine minimum remained a placeholder; switching away kept the window parked; switching back restored actual visible WindowServer bounds and native keyboard focus without a corrective `find`. Label-only fixtures also passed full-screen/float restoration and native focus checks, with a WindowServer front-order check for the floating window.
+
+The live hover check passed with a pointer move and no click on the preceding beta.5 build. Its window-manager and placeholder sources are byte-identical to the tested beta.6 build, whose AppKit hover tests passed again. Original configuration was restored byte-for-byte and all disposable windows were closed. The inventory still records the original captured beta.1 baseline; this dated validation does not recapture that snapshot.
+
+Real multiple-display behavior, closing during the delayed callback, drag/occlusion, physical typing/shortcuts and a same-revision live A/B remain unverified. An editable-field fixture produced extra AppKit popup windows and inconclusive restoration results. The initial Arc/Brave refusal trigger was not isolated; opening Arc's command bar alone did not reliably reproduce it. Fresh-install recovery and a live v1 rollback are still pending.
 
 The original app, config and layout state were saved in a private recovery directory outside Git. Local test bundles omit the Sparkle update key to keep the experimental binary in place. Changing an ad hoc app's signature can require removing and re-adding its existing Accessibility entry; toggling the old entry alone retained the stale signature during this test. Recheck `paw status` after every binary replacement.
 
