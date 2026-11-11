@@ -1,26 +1,11 @@
 #!/bin/bash
-
-# Color Palette
-export BLACK=0xff212121
-export WHITE=0xfff8f8f2
-export RED=0xffff5555
-export GREEN=0xff50fa7b
-export BLUE=0xff82aaff
-export YELLOW=0xffffcb6b
-export ORANGE=0xffffcb6b
-export MAGENTA=0xffc792ea
-export GREY=0xff545454
+# Warm, restrained palette inspired by pseudobun's rounded-island bar.
+export BLACK=0xff1d1d16 WHITE=0xfffbfbf9 GREY=0xffabab9c
+export RED=0xffff6467 GREEN=0xff43d58f BLUE=0xff8698eb
+export YELLOW=0xffead186 ORANGE=0xfffcb52c MAGENTA=0xffac79ff
 export TRANSPARENT=0x00000000
-
-# General bar colors
-export BAR_COLOR=0x00000000
-export BAR_BORDER_COLOR=0xff2121ff
-export ICON_COLOR=$WHITE
-export LABEL_COLOR=$WHITE
-export BACKGROUND_1=0xff3b4251
-export BACKGROUND_2=0xff7794D1
-
-export POPUP_BACKGROUND_COLOR=0x44000000
-export POPUP_BORDER_COLOR=$WHITE
-
+export BAR_COLOR=$TRANSPARENT BAR_BORDER_COLOR=$TRANSPARENT
+export ICON_COLOR=$WHITE LABEL_COLOR=$WHITE
+export BACKGROUND_1=0xeb1d1d16 BACKGROUND_2=0xff2b2b22
+export POPUP_BACKGROUND_COLOR=0xf01d1d16 POPUP_BORDER_COLOR=0x1affffff
 export SHADOW_COLOR=$BLACK

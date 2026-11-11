@@ -1,27 +1,21 @@
 #!/bin/bash
-
-sketchybar --add event paw_changed
-
-# shortcut: show numbered workspaces 1–12, use dynamic items if you need more or named workspaces.
+sketchybar --add event paw_changed --add event paw_focus
+# shortcut: numbered workspaces 1–12; add named/dynamic items before using a side workspace.
 for sid in {1..12}; do
-  sketchybar --add item paw.space.$sid left \
-    --set paw.space.$sid \
-      drawing=off icon="$sid" icon.padding_left=10 icon.padding_right=10 \
-      padding_left=2 padding_right=2 label.padding_right=20 \
-      icon.highlight_color="$BLUE" label.color="$GREY" label.highlight_color="$WHITE" \
-      label.font="sketchybar-app-font:Regular:16.0" label.y_offset=-1 \
-      background.color="$BACKGROUND_1" background.border_color="$BACKGROUND_2" \
-      script="$PLUGIN_DIR/paw.sh" \
+  sketchybar --add item paw.space.$sid left --set paw.space.$sid \
+    drawing=off icon="$sid" icon.padding_left=10 icon.padding_right=10 \
+    padding_left=1 padding_right=1 label.padding_left=6 label.padding_right=10 \
+    icon.highlight_color="$YELLOW" label.color="$GREY" label.highlight_color="$WHITE" \
+    label.font="sketchybar-app-font:Regular:13.0" label.y_offset=-1 \
+    background.height=22 background.corner_radius=7 background.padding_left=0 background.padding_right=0 \
+    background.color="$TRANSPARENT" script="$PLUGIN_DIR/paw.sh" \
     --subscribe paw.space.$sid mouse.clicked
 done
-
-sketchybar --add item space_creator left \
-  --set space_creator icon=􀆊 icon.font="$FONT:Heavy:16.0" \
-    padding_left=10 padding_right=8 label.drawing=off display=active \
-    icon.color="$WHITE" script="$PLUGIN_DIR/paw.sh" \
-  --subscribe space_creator mouse.clicked
-
-sketchybar --add item paw.state left \
-  --set paw.state display=active label.font="$FONT:Bold:12.0" \
-    icon.font="$FONT:Bold:16.0" script="$PLUGIN_DIR/paw.sh" \
-  --subscribe paw.state paw_changed system_woke display_change mouse.clicked
+sketchybar --add item space_creator left --set space_creator \
+  icon=􀆊 icon.font="$FONT:Regular:12.0" icon.color="$GREY" \
+  padding_left=4 padding_right=4 label.drawing=off display=active \
+  script="$PLUGIN_DIR/paw.sh" --subscribe space_creator mouse.clicked
+sketchybar --add item paw.state left --set paw.state \
+  display=active label.font="$FONT:Medium:10.0" label.color="$GREY" \
+  icon.font="$FONT:Regular:13.0" padding_right=7 script="$PLUGIN_DIR/paw.sh" \
+  --subscribe paw.state paw_changed paw_focus system_woke display_change

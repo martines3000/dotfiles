@@ -1,21 +1,17 @@
 #!/bin/bash
-
 source "$CONFIG_DIR/colors.sh"
-
-COUNT="$(brew outdated | wc -l | tr -d ' ')"
-
-COLOR=$RED
-
-case "$COUNT" in
-  [3-5][0-9]) COLOR=$ORANGE
-  ;;
-  [1-2][0-9]) COLOR=$YELLOW
-  ;;
-  [1-9]) COLOR=$WHITE
-  ;;
-  0) COLOR=$GREEN
-     COUNT=􀆅
-  ;;
-esac
-
-sketchybar --set $NAME label=$COUNT icon.color=$COLOR
+cache="${XDG_CACHE_HOME:-$HOME/.cache}/sketchybar/brew_outdated"
+count=$(cat "$cache" 2>/dev/null)
+color=$GREY
+label="?"
+if [[ "$count" =~ ^[0-9]+$ ]]; then
+  label=$count
+  color=$WHITE
+  if [ "$count" -eq 0 ]; then color=$GREEN; label=􀆅
+  elif [ "$count" -ge 30 ]; then color=$RED
+  elif [ "$count" -ge 10 ]; then color=$YELLOW; fi
+elif [[ "$count" =~ ^([0-9]+|\?)!$ ]]; then
+  label=$count
+  color=$ORANGE
+fi
+sketchybar --set "$NAME" label="$label" icon.color="$color"

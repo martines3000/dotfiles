@@ -2,10 +2,26 @@
 
 V2 was activated on this Mac on **2026-11-10**, using PAW `0.1.0-beta.1+5249781`. The config matches the saved v2 snapshot. PAW, its Accessibility grant and the bar were checked; yabai/skhd/borders were inactive. This records a starting point, not proof that every keyboard, layout or display path works.
 
+## Last validated PAW build — 2026-11-10
+
+PAW `0.1.0-beta.6+13037f1`, source revision [`13037f1cf79b07a6ae54cc987601c7022b3ed3d2`](https://github.com/pseudobun/paw/commit/13037f1cf79b07a6ae54cc987601c7022b3ed3d2), was built, installed and granted Accessibility on this Mac. It includes three fixes that are now merged upstream:
+
+- [#29 — stale minimum recovery](https://github.com/pseudobun/paw/pull/29): retry a parked window's tile size and recover if it now fits, preserving genuine constraints and newer focus requests.
+- [#30 — placeholder hover focus](https://github.com/pseudobun/paw/pull/30): hovering selects a placeholder when focus-follows-mouse is enabled, while its constrained window stays parked.
+- [#31 — focus after full-screen/float toggles](https://github.com/pseudobun/paw/pull/31): bring the restored window forward and give it native focus.
+
+All **86 Swift tests** and [CI for the tested head](https://github.com/pseudobun/paw/actions/runs/42904625034) passed. The native minimum-size regression passed with animations disabled and enabled at 180 ms: a genuine minimum remained a placeholder; switching away kept the window parked; switching back restored actual visible WindowServer bounds and native keyboard focus without a corrective `find`. Label-only fixtures also passed full-screen/float restoration and native focus checks, with a WindowServer front-order check for the floating window.
+
+The live hover check passed with a pointer move and no click on the preceding beta.5 build. Its window-manager and placeholder sources are byte-identical to the tested beta.6 build, whose AppKit hover tests passed again. Original configuration was restored byte-for-byte and all disposable windows were closed. The inventory still records the original captured beta.1 baseline; this dated validation does not recapture that snapshot.
+
+Real multiple-display behavior, closing during the delayed callback, drag/occlusion, physical typing/shortcuts and a same-revision live A/B remain unverified. An editable-field fixture produced extra AppKit popup windows and inconclusive restoration results. The initial Arc/Brave refusal trigger was not isolated; opening Arc's command bar alone did not reliably reproduce it. Fresh-install recovery and a live v1 rollback are still pending.
+
+The original app, config and layout state were saved in a private recovery directory outside Git. Local test bundles omit the Sparkle update key to keep the experimental binary in place. Changing an ad hoc app's signature can require removing and re-adding its existing Accessibility entry; toggling the old entry alone retained the stale signature during this test. Recheck `paw status` after every binary replacement.
+
 ## A small experiment loop
 
 1. Start from the saved baseline or keep a private copy of the file you are about to edit. The [recovery guide](SWITCHING.md) explains returning to v1 or undoing a profile copy.
-2. Change one behavior at a time. Keep the familiar Option+I/J/K/L shortcuts while testing other choices. Useful first experiments are focus-follow-mouse behavior, stack cycling, resize steps and which apps should float.
+2. Change one behavior at a time. Keep the preferred focus-follows-mouse behavior and familiar Option+I/J/K/L shortcuts. Useful experiments are stack cycling, resize steps and which apps should float.
 3. Run `paw config check`, then `paw reload` and `paw status`. A reload error keeps the last good config; record the error locally rather than guessing what was applied. If PAW exits, capture the failure and restart it with `open -a paw`.
 4. Test the exact action that motivated the change. Write down expected and actual results, the starting layout, relevant app versions and how often it reproduces. Stop once a test answers the question; do not rearrange unrelated workspaces for coverage.
 5. Keep a useful change in the live config until it feels right. Before committing it, review the selected diff, scan for private data and update its inventory hash/provenance. A good live experiment is not automatically a new saved baseline.
